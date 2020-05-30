@@ -1,16 +1,16 @@
 <?php 
-	$koneksi = new mysqli("localhost","root","","instantgram");
+	$koneksi = new mysqli("localhost","root","","db_agenproperti");
 
-	$user= $_POST['username'];
-	$pass= $_POST['password'];
+	$username= $_POST['username'];
+	$password= $_POST['password'];
 
-	$sql = "SELECT * FROM user WHERE username='$user'";
+	$sql = "SELECT * FROM user WHERE username='$username'";
 	$hasil = $koneksi->query($sql);
 
 	if ($row = $hasil->fetch_array())
 	{
 		$salt = $row['salt'];
-		$md5pass = md5($pass);
+		$md5pass = md5($password);
 		$md5salt= $salt.$md5pass.$salt;
 		$md5final = md5($md5salt);
 
