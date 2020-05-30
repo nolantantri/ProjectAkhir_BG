@@ -21,7 +21,7 @@
 			session_start();
 			$_SESSION['nama'] = $row['nama'];
 			$_SESSION['username'] = $user;
-			header("Location: FormHome.php");
+			header("Location: index.php");
 		}
 			
 		else
