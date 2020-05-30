@@ -3,7 +3,8 @@
 	if(isset($_SESSION['nama']))
 	{
 		unset($_SESSION['nama']);
-		header("Location: index.php");
+		echo "<script type='text/javascript'> alert('Berhasil melakukan SignOut');window.location.href='index.php'</script>";
+
 	}
 	else
 	{
