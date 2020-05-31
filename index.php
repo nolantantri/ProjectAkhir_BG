@@ -69,6 +69,12 @@
           <i class="far fa-user"></i>
         </a>        
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link"  href="FormLogout.php">
+          <i class="fa fa-sign-out"></i>
+        </a>        
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -133,6 +139,25 @@
               </li>      
             </ul>
           </li>
+
+           <li class="nav-item has-treeview">
+            <a href="FormPointOfInterest.php" class="nav-link">
+              <i class="nav-icon fa fa-circle"></i>
+              <p>
+                Data Point Of Interest
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item has-treeview">
+            <a href="FormPointOfInterest.php" class="nav-link">
+              <i class="nav-icon fa fa-circle"></i>
+              <p>
+                Data Property
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
