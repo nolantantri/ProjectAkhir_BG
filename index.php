@@ -156,6 +156,7 @@
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
+		
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -166,6 +167,10 @@
         <div class="row">
           <div id="map" class="map" style="width: 100%;height:350px;"></div>
         </div>
+		
+		<div style="background-color:red; width:100%; height:auto;">
+			fadsfasdfasd
+		</div>
       </div>
     </section>
     <!-- /.content -->
