@@ -130,7 +130,6 @@
               </p>
             </a>
 
-
             <ul class="nav nav-treeview" style="margin-left: 45px">
               <li class="nav-item">
                 <select id="pilih" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" onchange="pilih_bg(this.value)">Select Your Maps
@@ -139,6 +138,15 @@
                 </select>
               </li>      
             </ul>
+          </li>
+
+           <li class="nav-item has-treeview">
+            <a href="FormPointOfInterest.php" class="nav-link">
+              <i class="nav-icon fa fa-circle"></i>
+              <p>
+                Data Point Of Interest
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
