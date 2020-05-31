@@ -21,7 +21,7 @@
 			session_start();
 			$_SESSION['nama'] = $row['nama'];
 			$_SESSION['username'] = $user;
-			header("Location: index.php");
+			header("Location: indexAdmin.php");
 		}
 			
 		else

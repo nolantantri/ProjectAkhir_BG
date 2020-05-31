@@ -72,6 +72,13 @@
           <i class="far fa-user"></i>
         </a>        
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link"  href="FormLogout.php">
+          <i class="fa fa-sign-out"></i>
+        </a>        
+      </li>
+    
     </ul>
   </nav>
   <!-- /.navbar -->
