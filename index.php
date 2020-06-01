@@ -84,7 +84,7 @@
 
   <?php	
 		if(isset($_SESSION['nama'])){ 
-			include('adminmenu.php');
+			include('view/adminmenu.php');
 		}
   ?>
   <!-- Main Sidebar Container -->
