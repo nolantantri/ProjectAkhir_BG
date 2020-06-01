@@ -21,14 +21,14 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="FormHome.php"><b>Agen Properti </b>XYZ</a>
+    <a href="#"><b>Agen Properti </b>XYZ</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in untuk Melihat Berbagai Properti yang Ditawarkan</p>
 
-      <form method="POST" action="../proses/LoginProses.php">
+      <form method="POST" action="../proses/login_proses.php">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="username" id="username" placeholder="Username">
           <div class="input-group-append">
@@ -63,7 +63,7 @@
 
     
       <p class="mb-0">
-        <a href="FormRegistrasi.php" class="text-center">Register a new membership</a>
+        <a href="form_registrasi.php" class="text-center">Register a new membership</a>
       </p>
 	  </form>
     </div>

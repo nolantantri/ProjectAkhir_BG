@@ -28,7 +28,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Daftar Sebagai Admin di Webgis Agen Properti</p>
 
-      <form method="POST" action="../proses/RegistrasiProses.php">
+      <form method="POST" action="../proses/registrasi_proses.php">
         <div class="input-group mb-3">
           <input type="text" name="nama" id="nama" class="form-control" placeholder="Full name">
           <div class="input-group-append">
@@ -80,7 +80,7 @@
 
       
 
-      <a href="FormLogin.php" class="text-center">I already have a membership</a>
+      <a href="form_login.php" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2020 at 12:44 PM
+-- Generation Time: Jun 01, 2020 at 06:10 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -57,9 +57,11 @@ CREATE TABLE `point_of_interest` (
 CREATE TABLE `property` (
   `idproperty` int(11) NOT NULL,
   `kategori_transaksi` enum('jual','beli') NOT NULL,
-  `jenis_property` varchar(45) NOT NULL,
+  `jenis_property` enum('rumah','ruko','gudang','kantor','tanah') NOT NULL,
   `harga` varchar(50) NOT NULL,
-  `alamat` varchar(50) DEFAULT NULL,
+  `alamat` varchar(50) NOT NULL,
+  `kelurahan` varchar(45) NOT NULL,
+  `kecamatan` varchar(45) NOT NULL,
   `luastanah` double NOT NULL,
   `luasbangunan` double NOT NULL,
   `geom` varchar(10000) NOT NULL,
@@ -79,13 +81,6 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `salt` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`iduser`, `username`, `nama`, `password`, `salt`) VALUES
-(1, 'ntantri', 'Nolan Tantri', '414a20f7044a95fa85a435d5c5cd2c38', 'gpregeribW');
 
 --
 -- Indexes for dumped tables
@@ -142,7 +137,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

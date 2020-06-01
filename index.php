@@ -84,14 +84,14 @@
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item">
-        <a class="nav-link"  href="view/FormLogin.php">
+        <a class="nav-link"  href="view/form_login.php">
           <i class="far fa-user"></i>
         </a>        
       </li>
 
 	<?php	if(isset($_SESSION['nama'])){ ?>
       <li class="nav-item">
-        <a class="nav-link"  href="proses/LogoutProses.php">
+        <a class="nav-link"  href="proses/logout_proses.php">
           <i class="fa fa-sign-out"></i>
         </a>        
       </li>
@@ -102,7 +102,7 @@
 
   <?php	
 		if(isset($_SESSION['nama'])){ 
-			include('view/FormAdminMenu.php');
+			include('view/admin_menu.php');
 		}
   ?>
   <!-- Main Sidebar Container -->
@@ -119,14 +119,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h2 class="m-0 text-dark">MAPS</h2>
           </div><!-- /.col -->
-          <div class="col-sm-6">
+         <!--  <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
-          </div><!-- /.col -->
+          </div> -->
+          <!-- /.col -->
         </div><!-- /.row -->
 		
       </div><!-- /.container-fluid -->
@@ -142,7 +143,7 @@
 		
 		<?php
 			$page = isset($_GET['page']) ? $_GET['page'] : 'home';
-			if (file_exists($page . '.php')) 
+			if (file_exists('view/' . $page . '.php'))  
 			{
 				include('view/' . $page . '.php');
 			}
@@ -250,7 +251,7 @@
   });
 
 	//tambah poi event
-		var format =  new ol.format.WKT();
+	var format =  new ol.format.WKT();
 	var source_point = new ol.source.Vector({
 	
 	});

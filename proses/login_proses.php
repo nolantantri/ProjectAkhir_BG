@@ -26,11 +26,11 @@
 			
 		else
 		{
-			echo "<script type='text/javascript'> alert('Gagal untuk melakukan LogIn');window.location.href='../view/FormLogIn.php'</script>";
+			echo "<script type='text/javascript'> alert('Gagal untuk melakukan LogIn');window.location.href='../view/form_login.php'</script>";
 		}
 	}
 	else
 	{
-		echo "<script type='text/javascript'> alert('Username dan Password tidak dapat ditemukan');window.location.href='../view/FormLogIn.php'</script>";
+		echo "<script type='text/javascript'> alert('Username dan Password tidak dapat ditemukan');window.location.href='../view/form_login.php'</script>";
 	}
  ?>
