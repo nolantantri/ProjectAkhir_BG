@@ -150,7 +150,7 @@
           </li>
 
            <li class="nav-item has-treeview">
-            <a href="FormPointOfInterest.php" class="nav-link">
+            <a href="FormProperty.php" class="nav-link">
               <i class="nav-icon fa fa-circle"></i>
               <p>
                 Data Property
