@@ -23,26 +23,26 @@
 
 				if ($hasil === true)
 				{
-					echo "<script type='text/javascript'> alert('Berhasil melakukan registrasi akun pengguna.'); window.location.href='FormLogIn.php' </script>";
+					echo "<script type='text/javascript'> alert('Berhasil melakukan registrasi akun pengguna.'); window.location.href='../view/FormLogIn.php' </script>";
 				}
 				else
 				{
-					echo "<script type='text/javascript'> alert('Mohon maaf, Gagal melakukan registrasi akun pengguna.');window.location.href='FormRegistrasi.php'</script>";
+					echo "<script type='text/javascript'> alert('Mohon maaf, Gagal melakukan registrasi akun pengguna.');window.location.href='../view/FormRegistrasi.php'</script>";
 				}
 			}
 			else
 			{
-				echo "<script type='text/javascript'> alert('Anda Belum Menyetujui Kebijakan yang Telah Kami Buat.');window.location.href='FormRegistrasi.php'</script>";
+				echo "<script type='text/javascript'> alert('Anda Belum Menyetujui Kebijakan yang Telah Kami Buat.');window.location.href='../view/FormRegistrasi.php'</script>";
 			}	
 		}
 		else
 		{
-			echo "<script type='text/javascript'> alert('Konfirmasi Password yang di Inputkan Salah.');window.location.href='FormRegistrasi.php'</script>";
+			echo "<script type='text/javascript'> alert('Konfirmasi Password yang di Inputkan Salah.');window.location.href='../view/FormRegistrasi.php'</script>";
 		}
 	}
 	else
 	{
-		echo "<script type='text/javascript'> alert('Pastikan Anda Mengisikan Seluruh Inputan yang Telah di Sediakan.');window.location.href='FormRegistrasi.php'</script>";
+		echo "<script type='text/javascript'> alert('Pastikan Anda Mengisikan Seluruh Inputan yang Telah di Sediakan.');window.location.href='../view/FormRegistrasi.php'</script>";
 	}
 		
 

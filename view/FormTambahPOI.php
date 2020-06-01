@@ -1,6 +1,6 @@
-<form method="POST" action="proses/addpoiProses.php">
+<form method="POST" action="../proses/TambahPOI_Proses.php">
 	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-	  <h1 class="display-4">ADD POINT OF INTEREST</h1><br>
+	  <h1 class="display-4">TAMBAH POINT OF INTEREST</h1><br>
 		<table  class="lead text-left">
 			<tr>
 			  <td>Nama </td>

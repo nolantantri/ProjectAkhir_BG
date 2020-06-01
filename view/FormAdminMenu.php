@@ -43,7 +43,6 @@
               </p>
             </a>
 
-
             <ul class="nav nav-treeview" style="margin-left: 45px">
               <li class="nav-item">
                 <select id="pilih" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" onchange="pilih_bg(this.value)">Select Your Maps
@@ -54,22 +53,37 @@
             </ul>
           </li>
 
-           <li class="nav-item has-treeview">
-            <a href="index.php?page=tambahpoi" class="nav-link">
-              <i class="nav-icon fa fa-circle"></i>
-              <p>
-                tambah Data Point Of Interest
-              </p>
-            </a>
-          </li>
 
-           <li class="nav-item has-treeview">
-            <a href="FormPointOfInterest.php" class="nav-link">
-              <i class="nav-icon fa fa-circle"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-map-marker"></i>
               <p>
-                Data Property
+                Data Point Of Interest
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="index.php?page=FormTambahPOI.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tambah POI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ubah POI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Hapus POI</p>
+                </a>
+              </li>
+
+            </ul>
           </li>
 
         </ul>

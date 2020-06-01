@@ -21,16 +21,16 @@
 			session_start();
 			$_SESSION['nama'] = $row['nama'];
 			$_SESSION['username'] = $user;
-			header("Location: index.php");
+			header("Location: ../index.php");
 		}
 			
 		else
 		{
-			echo "<script type='text/javascript'> alert('Gagal untuk melakukan LogIn');window.location.href='FormLogIn.php'</script>";
+			echo "<script type='text/javascript'> alert('Gagal untuk melakukan LogIn');window.location.href='../view/FormLogIn.php'</script>";
 		}
 	}
 	else
 	{
-		echo "<script type='text/javascript'> alert('Username dan Password tidak dapat ditemukan');window.location.href='FormLogIn.php'</script>";
+		echo "<script type='text/javascript'> alert('Username dan Password tidak dapat ditemukan');window.location.href='../view/FormLogIn.php'</script>";
 	}
  ?>

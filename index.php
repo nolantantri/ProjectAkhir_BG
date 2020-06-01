@@ -39,12 +39,30 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark navbar-primary" style="margin-left:0px;">
+  <?php  
+  if(isset($_SESSION['nama'])){ 
+  ?>
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-primary">  
+  <?php 
+    }
+    else{ 
+  ?>
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-primary" style="margin-left:0px;">
+  <?php 
+  }
+  ?>
+  
     <!-- Left navbar links -->
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
+       <?php  
+       if(isset($_SESSION['nama'])){ 
+       ?>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+       <?php 
+       }
+       ?> 
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index.php" class="nav-link">Home</a>
       </li>
@@ -66,14 +84,14 @@
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item">
-        <a class="nav-link"  href="FormLogin.php">
+        <a class="nav-link"  href="view/FormLogin.php">
           <i class="far fa-user"></i>
         </a>        
       </li>
 
 	<?php	if(isset($_SESSION['nama'])){ ?>
       <li class="nav-item">
-        <a class="nav-link"  href="FormLogout.php">
+        <a class="nav-link"  href="proses/LogoutProses.php">
           <i class="fa fa-sign-out"></i>
         </a>        
       </li>
@@ -84,7 +102,7 @@
 
   <?php	
 		if(isset($_SESSION['nama'])){ 
-			include('view/adminmenu.php');
+			include('view/FormAdminMenu.php');
 		}
   ?>
   <!-- Main Sidebar Container -->
@@ -126,7 +144,7 @@
 			$page = isset($_GET['page']) ? $_GET['page'] : 'home';
 			if (file_exists($page . '.php')) 
 			{
-				include($page . '.php');
+				include('view/' . $page . '.php');
 			}
 		?>
       </div>
@@ -135,15 +153,32 @@
   </div>
   <!-- /.content-wrapper -->
 
-
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2019 <a href="http://ubaya.ac.id">Bussiness Geographics</a>.</strong>
-    <br>
-    Nolan (160417031) - Antonius Paulus. W (160417064).
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.5
-    </div>
-  </footer>
+  <?php  
+  if(isset($_SESSION['nama'])){ 
+  ?>
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2019 <a href="http://ubaya.ac.id">Bussiness Geographics</a>.</strong>
+      <br>
+      Nolan (160417031) - Antonius Paulus. W (160417064).
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.5
+      </div>
+    </footer>
+  <?php 
+    }
+    else{ 
+  ?>
+     <footer class="main-footer" style="margin-left: 0px;">
+      <strong>Copyright &copy; 2019 <a href="http://ubaya.ac.id">Bussiness Geographics</a>.</strong>
+      <br>
+      Nolan (160417031) - Antonius Paulus. W (160417064).
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.5
+      </div>
+    </footer>
+  <?php 
+  }
+  ?>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
