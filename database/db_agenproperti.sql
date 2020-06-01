@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2020 at 09:36 AM
+-- Generation Time: Jun 01, 2020 at 12:44 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -45,8 +45,7 @@ CREATE TABLE `point_of_interest` (
   `idPOI` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jenis_pointofinterest` enum('mall','sekolah','pasar','tempat wisata','restoran') NOT NULL,
-  `pointX` double DEFAULT NULL,
-  `pointY` double DEFAULT NULL
+  `geom` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -63,6 +62,7 @@ CREATE TABLE `property` (
   `alamat` varchar(50) DEFAULT NULL,
   `luastanah` double NOT NULL,
   `luasbangunan` double NOT NULL,
+  `geom` varchar(10000) NOT NULL,
   `keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -79,6 +79,13 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `salt` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`iduser`, `username`, `nama`, `password`, `salt`) VALUES
+(1, 'ntantri', 'Nolan Tantri', '414a20f7044a95fa85a435d5c5cd2c38', 'gpregeribW');
 
 --
 -- Indexes for dumped tables
@@ -135,7 +142,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
