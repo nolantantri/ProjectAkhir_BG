@@ -128,9 +128,6 @@
 			{
 				include($page . '.php');
 			}
-			else{
-				echo "file not found!";
-			}
 		?>
       </div>
     </section>
@@ -242,9 +239,9 @@
 			var geom = feature.getGeometry().clone();
 			geom = geom.transform('EPSG:3857','EPSG:4326');
 			var wkt  = format.writeGeometry(geom);
-			var temp = wkt.split(" ");
-			$('#x_point').val(temp[0].substr(6));
-			$('#y_point').val(temp[1].substr(0, temp[1].length-1));
+			$('#geom').val(wkt);
+			
+	        map.removeInteraction(draw);
 		});
 	} 
 

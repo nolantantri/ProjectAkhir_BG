@@ -1,4 +1,4 @@
-<form method="POST" action="addpoiProses.php">
+<form method="POST" action="proses/addpoiProses.php">
 	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
 	  <h1 class="display-4">ADD POINT OF INTEREST</h1><br>
 		<table  class="lead text-left">
@@ -26,12 +26,8 @@
 			  </td>
 			</tr>
 			<tr>
-			  <td>X 
-				<td>: <input type="text" name="x_point" id="x_point"></td>
-			</tr>
-			<tr>
-			  <td>Y 
-				<td>: <input type="text" name="y_point" id="y_point"></td>
+			  <td>goem 
+				<td>: <input type="text" name="geom" id="geom"></td>
 			</tr>
 		  </table><br>
 	  <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH</button>
