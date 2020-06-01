@@ -52,8 +52,8 @@
 			<tr>
 			  <td>Pasang Point &nbsp</td>
 			  <td>
-				: <button type="button" class="btn_on" id="btnPoin" onclick="on_digit()">DIGIT POLYGON</button><br>
-				<span id="wktPoin" class="lead"> </span>
+				: <button type="button" class="btn_on" id="btnPolygon" onclick="on_digit('polygon')">DIGIT POLYGON</button>
+				
 			  </td>
 			</tr>
 			<tr>
@@ -62,9 +62,9 @@
 			</tr>
 			<tr>
 			  <td>Keterangan</td>
-			  <td>: <textarea name="keterangan" id="keterangan"></textarea></td>
+			  <td>: <textarea name="keterangan" id="keterangan" style="width: 253px"></textarea></td>
 			</tr>
 		  </table><br>
-	  <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH</button>
+	  <button class="btn btn-primary" id="btnSubmit" name="addProperti">TAMBAH</button>
 	</div>
 </form>

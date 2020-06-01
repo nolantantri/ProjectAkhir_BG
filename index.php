@@ -250,37 +250,63 @@
     })
   });
 
-	//tambah poi event
+	//tambah POI dan PROPERTIES event
 	var format =  new ol.format.WKT();
+
+
 	var source_point = new ol.source.Vector({
-	
+
 	});
+  
+  var source_polygon = new ol.source.Vector({
+  
+  });
 	
 	var layer_point = new ol.layer.Vector({
 		source: source_point
 	});
 
-	var draw = new ol.interaction.Draw({
-		source: source_point,
-		type: 'Point'
-	});
+  var draw_point = new ol.interaction.Draw({
+    source: source_point,
+    type: 'Point'
+  });
+  
+  var draw_polygon = new ol.interaction.Draw({
+    source: source_polygon,
+    type: 'Polygon'
+  });
 
-	function on_digit() {
-		// Fungsi untuk mengaktifkan kursor digitasi
-		$('#btn_on').attr('disabled','disabled');
-		$('#btn_off').removeAttr('disabled');
-		map.addInteraction(draw);
-		draw.on('drawend', function(evt){
-			var feature = evt.feature;
-			var geom = feature.getGeometry().clone();
-			geom = geom.transform('EPSG:3857','EPSG:4326');
-			var wkt  = format.writeGeometry(geom);
-			$('#geom').val(wkt);
-			
-	        map.removeInteraction(draw);
-		});
-	} 
+  function on_digit(type) {
+    var draw = "";
+    if(type=="polygon")
+    {
+      draw = draw_polygon;
+    }
+    else if(type=="point")
+    {
+      draw = draw_point;
+    }
 
+    // Fungsi untuk mengaktifkan kursor digitasi
+    map.addInteraction(draw);
+    draw.on('drawend', function(evt){
+      var feature = evt.feature;
+      var geom = feature.getGeometry().clone();
+      geom = geom.transform('EPSG:3857','EPSG:4326');
+      var wkt  = format.writeGeometry(geom);
+      
+
+      if(type=="polygon")
+      {
+        $('#geom').val(wkt);
+      }
+      else if(type=="point")
+      {
+         map.removeInteraction(draw);
+         $('#geom').val(wkt);
+      }    
+    });
+  } 
 </script>
 
 

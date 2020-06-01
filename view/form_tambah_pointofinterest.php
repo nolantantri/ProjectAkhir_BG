@@ -23,7 +23,7 @@
 			<tr>
 			  <td>Pasang Point &nbsp</td>
 			  <td>
-				: <button type="button" class="btn_on" id="btnPoin" onclick="on_digit()">DIGIT TITIK</button><br>
+				: <button type="button" class="btn_on" id="btnPoin" onclick="on_digit('point')">DIGIT TITIK</button><br>
 				<span id="wktPoin" class="lead"> </span>
 			  </td>
 			</tr>
