@@ -1,9 +1,4 @@
-<?php
-	require('connect.php');
-	
-	
-
-?>
+<?php 	require('connect.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +46,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.php" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -92,6 +87,9 @@
 			include('adminmenu.php');
 		}
   ?>
+  <!-- Main Sidebar Container -->
+  
+
   <!-- Content Wrapper. Contains page content -->
   <?php	if(isset($_SESSION['nama'])){ ?>
 		<div class="content-wrapper" >
@@ -142,8 +140,9 @@
 
 
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+    <strong>Copyright &copy; 2019 <a href="http://ubaya.ac.id">Bussiness Geographics</a>.</strong>
+    <br>
+    Nolan (160417031) - Antonius Paulus. W (160417064).
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.5
     </div>
