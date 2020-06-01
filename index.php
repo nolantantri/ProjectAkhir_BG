@@ -1,3 +1,9 @@
+<?php
+	require('connect.php');
+	
+	
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +44,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark navbar-primary">
+  <nav class="main-header navbar navbar-expand navbar-dark navbar-primary" style="margin-left:0px;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -70,103 +76,28 @@
         </a>        
       </li>
 
+	<?php	if(isset($_SESSION['nama'])){ ?>
       <li class="nav-item">
         <a class="nav-link"  href="FormLogout.php">
           <i class="fa fa-sign-out"></i>
         </a>        
       </li>
+	<?php } ?>
     </ul>
   </nav>
   <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index.php" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">Agen Properti</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">
-            <?php 
-              $koneksi = new mysqli("localhost","root","","db_agenproperti");
-              session_start();
-
-              $nama = ""; 
-
-              if (isset($_SESSION['nama']))
-              {
-                $nama = $_SESSION['nama'];
-                echo $nama;
-              }
-              else
-              {
-                echo "-";
-              }
-            ?>
-          </a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-map-marker"></i>
-              <p>
-                Maps Option
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-
-
-            <ul class="nav nav-treeview" style="margin-left: 45px">
-              <li class="nav-item">
-                <select id="pilih" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" onchange="pilih_bg(this.value)">Select Your Maps
-                  <option value="osm">OpenStreet Map</option>
-                  <option value="bing_aerialwithlabels">Bing Aerial (labels)</option>
-                </select>
-              </li>      
-            </ul>
-          </li>
-
-           <li class="nav-item has-treeview">
-            <a href="FormPointOfInterest.php" class="nav-link">
-              <i class="nav-icon fa fa-circle"></i>
-              <p>
-                Data Point Of Interest
-              </p>
-            </a>
-          </li>
-
-           <li class="nav-item has-treeview">
-            <a href="FormPointOfInterest.php" class="nav-link">
-              <i class="nav-icon fa fa-circle"></i>
-              <p>
-                Data Property
-              </p>
-            </a>
-          </li>
-
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>  
-    <!-- /.sidebar -->
-  </aside>
-
+  <?php	
+		if(isset($_SESSION['nama'])){ 
+			include('adminmenu.php');
+		}
+  ?>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <?php	if(isset($_SESSION['nama'])){ ?>
+		<div class="content-wrapper" >
+	<?php }else{ ?>
+		<div class="content-wrapper" style="margin-left:0px;">
+	<?php }?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -193,9 +124,16 @@
           <div id="map" class="map" style="width: 100%;height:350px;"></div>
         </div>
 		
-		<div style="background-color:red; width:100%; height:auto;">
-			fadsfasdfasd
-		</div>
+		<?php
+			$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+			if (file_exists($page . '.php')) 
+			{
+				include($page . '.php');
+			}
+			else{
+				echo "file not found!";
+			}
+		?>
       </div>
     </section>
     <!-- /.content -->
@@ -226,7 +164,7 @@
     key: 'AjQ2yJ1-i-j_WMmtyTrjaZz-3WdMb2Leh_mxe9-YBNKk_mz1cjRC7-8ILM7WUVEu',
     imagerySet: 'AerialWithLabels',
   });
-
+  
   // 1. Variabel untuk menampung Layer Tile Bing Map
   // Dipanggil untuk di layer[...]
   var bing_AerialWithLabels = new ol.layer.Tile({
@@ -279,6 +217,37 @@
       zoom: 11
     })
   });
+
+	//tambah poi event
+		var format =  new ol.format.WKT();
+	var source_point = new ol.source.Vector({
+	
+	});
+	
+	var layer_point = new ol.layer.Vector({
+		source: source_point
+	});
+
+	var draw = new ol.interaction.Draw({
+		source: source_point,
+		type: 'Point'
+	});
+
+	function on_digit() {
+		// Fungsi untuk mengaktifkan kursor digitasi
+		$('#btn_on').attr('disabled','disabled');
+		$('#btn_off').removeAttr('disabled');
+		map.addInteraction(draw);
+		draw.on('drawend', function(evt){
+			var feature = evt.feature;
+			var geom = feature.getGeometry().clone();
+			geom = geom.transform('EPSG:3857','EPSG:4326');
+			var wkt  = format.writeGeometry(geom);
+			var temp = wkt.split(" ");
+			$('#x_point').val(temp[0].substr(6));
+			$('#y_point').val(temp[1].substr(0, temp[1].length-1));
+		});
+	} 
 
 </script>
 
