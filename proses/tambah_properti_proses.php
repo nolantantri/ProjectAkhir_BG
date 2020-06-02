@@ -9,7 +9,7 @@
 	$kecamatan= $_POST['kecamatan'];
 	$luas_tanah= $_POST['luas_tanah'];
 	$luas_bangunan= $_POST['luas_bangunan'];	
-	$geom = $_POST['geom'];
+	$geom = $_POST['geom_polygon'];
 	$keterangan= $_POST['keterangan'];
 
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Agen Properti | Tambah Point Of Interest</title>
+  <title>Agen Properti | Point Of Interest</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -147,10 +147,9 @@
             <a href="form_pointofinterest.php" class="nav-link">
               <i class="nav-icon fas fa-map-marker"></i>
               <p>
-                 Data Point Of Interest
+                Data Point Of Interest
               </p>
             </a>
-
           </li>
 
            <li class="nav-item has-treeview">
@@ -182,12 +181,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h2 class="m-0 text-dark">Tambah Data Point Of Interest</h2>
+            <h2 class="m-0 text-dark">Point Of Interest</h2>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-              <li class="breadcrumb-item active">Tambah Data POI</li>
+              <li class="breadcrumb-item active">Data Point Of Interest</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -201,45 +200,45 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
+           <div class="tabledata" style="width: 100%;text-align: center;">
+               <table class="table" width="100%">
+                <tr class="text-center">
+                  <th>No</th>
+                  <th>Jenis</th>
+                  <th>Nama</th>
+                  <th>Action</th>
+                </tr>
+                <tr class="text-center">
+                  <td>Data Coba 1</td>
+                  <td>Data Coba 2</td>
+                  <td>Data Coba 3</td>
+                  <td>Edit | Delete</td>
+                </tr> 
+              </table><br>
+              <a class="btn btn-primary" href="form_tambah_pointofinterest.php">TAMBAH</a>
+            </div>
+
+          <div id="maps_option" style="margin-left: 20px;">
+            <p style="font-weight: bold;">Tampilan Peta : &nbsp
+            <select id="pilih" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" onchange="pilih_bg(this.value)">
+              <option value="osm">OpenStreet Map</option>
+              <option value="bing_aerialwithlabels">Bing Aerial (labels)</option>
+            </select>
+            </p>
+          </div>
+
           <div id="map" class="map" style="width: 100%;height:350px;"></div>
-        </div>
 
-      <form method="POST" action="../proses/tambah_pointofinterest_proses.php">
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-          <table  class="lead text-left">
-            <tr>
-              <td>Nama Point</td>
-              <td>: <input type="text" name="nama" id="txbPOI"></td>
-            </tr>
-            <tr>
-              <td>Jenis</td>
-              <td>: 
-              <select id="Jenis_poi" name="jenis_poi">
-                <option value="null" selected hidden></option>
-                <option value="MALL">Mall</option>
-                <option value="SEKOLAH">Sekolah</option>
-                <option value="PASAR">Pasar</option>
-                <option value="TEMPAT WISATA">Tempat Wisata</option>
-                <option value="RESTORAN">Restoran</option>
-              </select> 
-              </td>
-            </tr>
-            <tr>
-              <td>Pasang Point &nbsp</td>
-              <td>
-              : <button type="button" class="btn_on" id="btnPoin" onclick="on_digit('point')">DIGIT TITIK</button><br>
-              <span id="wktPoin" class="lead"> </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Geom 
-              <td>: <input type="text" name="geom_point" id="geom_point"></td>
-            </tr>
-            </table><br>
-          <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH</button>
+          <!-- TEMPAT DATA -->
         </div>
-      </form>
-
+    
+    <?php
+      $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+      if (file_exists('view/' . $page . '.php'))  
+      {
+        include('view/' . $page . '.php');
+      }
+    ?>
       </div>
     </section>
     <!-- /.content -->
@@ -282,108 +281,229 @@
 <!-- ./wrapper -->
 
 <script type="text/javascript">
-  // Style untuk Mall
-  var style_icon_mall =new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5 , 1],
-      anchorXunits:'fraction',
-      anchorYunits: 'fraction',
-      src:'../icons/fashion.png'
-    })
-  });
+   // Style untuk Mall
+    var style_icon_mall =new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5 , 1],
+        anchorXunits:'fraction',
+        anchorYunits: 'fraction',
+        src:'../icons/fashion.png'
+      })
+    });
+    // Style untuk Sekolah
+    var style_icon_sekolah =new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5 , 1],
+        anchorXunits:'fraction',
+        anchorYunits: 'fraction',
+        src:'../icons/schools.png'
+      })
+    });
+    // Style untuk Pasar
+    var style_icon_pasar =new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5 , 1],
+        anchorXunits:'fraction',
+        anchorYunits: 'fraction',
+        src:'../icons/shopping.png'
+      })
+    });
+   // Style untuk Tempat Wisata
+   var style_icon_wisata =new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5 , 1],
+        anchorXunits:'fraction',
+        anchorYunits: 'fraction',
+        src:'../icons/tours.png'
+      })
+    });
+   // Style untuk Tempat Restaurant
+   var style_icon_restaurant =new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5 , 1],
+        anchorXunits:'fraction',
+        anchorYunits: 'fraction',
+        src:'../icons/restaurants.png'
+      })
+    });
 
-  // Style untuk Sekolah
-  var style_icon_sekolah =new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5 , 1],
-      anchorXunits:'fraction',
-      anchorYunits: 'fraction',
-      src:'../icons/schools.png'
-    })
-  });
-
-  // Style untuk Pasar
-  var style_icon_pasar =new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5 , 1],
-      anchorXunits:'fraction',
-      anchorYunits: 'fraction',
-      src:'../icons/shopping.png'
-    })
-  });
-
- // Style untuk Tempat Wisata
- var style_icon_wisata =new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5 , 1],
-      anchorXunits:'fraction',
-      anchorYunits: 'fraction',
-      src:'../icons/tours.png'
-    })
-  });
-
- // Style untuk Tempat Restaurant
- var style_icon_restaurant =new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5 , 1],
-      anchorXunits:'fraction',
-      anchorYunits: 'fraction',
-      src:'../icons/restaurants.png'
-    })
-  });
-
- var jenisTempat;
- $('#Jenis_poi').on('change', function(){
-  jenisTempat = $('#Jenis_poi').val();
- });
-
-  var jenis_icons = function(){
-    return function(feature, resolution){
-      if (jenisTempat == "MALL") 
-      {
-        return [style_icon_mall]
-      }
-      else if (jenisTempat == "SEKOLAH")
-      {
-        return [style_icon_sekolah]
-      }
-      else if (jenisTempat == "PASAR") 
-      {
-        return [style_icon_pasar]
-      }
-      else if (jenisTempat == "TEMPAT WISATA")
-      {
-        return [style_icon_wisata]
-      }
-      else if (jenisTempat == "RESTORAN") 
-      {
-        return [style_icon_restaurant]
-      }
+    var jenis_icons = function(){
+      return function(feature, resolution){
+        if (feature.get('jenis') == "mall") 
+        {
+          return [style_icon_mall]
+        }
+        else if (feature.get('jenis') == "sekolah")
+        {
+          return [style_icon_sekolah]
+        }
+        else if (feature.get('jenis') == "pasar") 
+        {
+          return [style_icon_pasar]
+        }
+        else if (feature.get('jenis')== "tempat wisata")
+        {
+          return [style_icon_wisata]
+        }
+        else if (feature.get('jenis') == "restoran")
+        {
+          return [style_icon_restaurant]
+        }
+      };
     };
-  };
+
 
   // Untuk menyimpan format WKT()
   // WKT() : point, line, polygon (dalam bentuk string)
   var format =  new ol.format.WKT();
   var feature;
-  var features_point=[];
+  var features_point_mall=[];
+  var features_point_sekolah=[];
+  var features_point_pasar=[];
+  var features_point_wisata=[];
+  var features_point_restoran=[];
   
-  // POINT
-  var source_point = new ol.source.Vector({
-     features: features_point
-  });
-  var contoh_point = new ol.layer.Vector({
-    source: source_point,
-    style:jenis_icons()
-  });
- 
+  //PHP Point 
+  <?php 
+  $sql = "SELECT * from point_of_interest";
+  $result = $koneksi->query($sql);
 
-  // 1.Penampung Layer Tile OSM
+  $i_mall=0;
+  $i_sekolah=0;
+  $i_pasar=0;
+  $i_wisata=0;
+  $i_restoran=0;
+
+  while ($r = $result->fetch_assoc()){
+    $jenisTempat= $r['jenis_pointofinterest'];
+  ?>
+    feature = format.readFeature('<?php echo $r['geom'] ?>',
+    {
+      dataProjection: 'EPSG:4326',
+      featureProjection: 'EPSG:3857'
+    });
+    feature.set('nama','<?php echo $r['nama'] ?>');
+    feature.set('jenispoi','<?php echo $r['jenis_pointofinterest'] ?>');
+    feature.set('geom','<?php echo $r['geom'] ?>');
+
+   
+  <?php  
+    if($jenisTempat == "mall" )
+    {
+      ?>
+      features_point_mall[<?php echo $i_mall; ?>]=feature;
+      <?php  
+      $i_mall++;
+    }
+    else if($jenisTempat == "sekolah")
+    {
+      ?>
+      features_point_sekolah[<?php echo $i_sekolah; ?>]=feature;
+      <?php  
+      $i_sekolah++;
+    }
+    else if($jenisTempat=="pasar")
+    {
+      ?>
+      features_point_pasar[<?php echo $i_pasar; ?>]=feature;
+      <?php  
+      $i_pasar++;
+    }
+    else if($jenisTempat=="tempat wisata")
+    {
+      ?>
+      features_point_wisata[<?php echo $i_wisata; ?>]=feature;
+      <?php  
+      $i_wisata++;
+    }
+    else if ($jenisTempat=="restoran")
+    {
+      ?>
+      features_point_restoran[<?php echo $i_restoran; ?>]=feature;
+      <?php  
+      $i_restoran++;
+    }
+  }
+  ?>
+
+
+  // POINT MALL
+  var source_point_mall = new ol.source.Vector({
+     features: features_point_mall
+  });
+  var contoh_point_mall = new ol.layer.Vector({
+    source: source_point_mall,
+    style:style_icon_mall
+  });
+
+  // POINT SEKOLAH
+  var source_point_sekolah = new ol.source.Vector({
+     features: features_point_sekolah
+  });
+  var contoh_point_sekolah = new ol.layer.Vector({
+    source: source_point_sekolah,
+    style:style_icon_sekolah
+  });
+
+  // POINT PASAR
+  var source_point_pasar = new ol.source.Vector({
+     features: features_point_pasar
+  });
+  var contoh_point_pasar = new ol.layer.Vector({
+    source: source_point_pasar,
+    style:style_icon_pasar
+  });
+
+  // POINT WISATA
+  var source_point_wisata = new ol.source.Vector({
+     features: features_point_wisata
+  });
+  var contoh_point_wisata = new ol.layer.Vector({
+    source: source_point_wisata,
+    style:style_icon_wisata
+  });
+
+  // POINT RESTORAN
+  var source_point_restoran = new ol.source.Vector({
+     features: features_point_restoran
+  });
+  var contoh_point_restoran = new ol.layer.Vector({
+    source: source_point_restoran,
+    style:style_icon_restaurant
+  });
+
+
+  // 1.Penampung source bingmaps
+  var sourceBingMaps_AerialWithLabels = new ol.source.BingMaps({
+    key: 'AjQ2yJ1-i-j_WMmtyTrjaZz-3WdMb2Leh_mxe9-YBNKk_mz1cjRC7-8ILM7WUVEu',
+    imagerySet: 'AerialWithLabels',
+  });
+  // Variabel untuk menampung Layer Tile Bing Map
+  // Dipanggil untuk di layer[...]
+  var bing_AerialWithLabels = new ol.layer.Tile({
+    preload: Infinity,
+    source: sourceBingMaps_AerialWithLabels,
+    visible: false,
+  });
+
+  // 2.Penampung Layer Tile OSM
   // Dipanggil untuk di layer[...]
   var osm = new ol.layer.Tile({
     source: new ol.source.OSM(),
     visible: true,
   });
+
+  // Function untuk aksi yang dilakukan ketika user melakukan pilihan pada combobox yang sebelumnya
+  function pilih_bg(pilih){
+    if(pilih=='osm'){
+      osm.setVisible(true);
+      bing_AerialWithLabels.setVisible(false);
+    }
+    if(pilih=='bing_aerialwithlabels'){
+      osm.setVisible(false);
+      bing_AerialWithLabels.setVisible(true);
+    }
+  }
 
   // Membuat Object Pembentuk Peta
   var map = new ol.Map({
@@ -391,7 +511,13 @@
     // Dengan 1 layer dari OSM atau bing_aerial(label)
     layers: [
       osm,
-      contoh_point,
+      bing_AerialWithLabels,   
+
+      contoh_point_mall,
+      contoh_point_sekolah,
+      contoh_point_pasar,
+      contoh_point_wisata,
+      contoh_point_restoran,
     ],
     controls:[
       //Define the default controls
@@ -413,8 +539,7 @@
   });
 
 
-  function on_digit(type) { 
-
+  function on_digit(type) {
     var draw = "";
     if(type=="point")
     {

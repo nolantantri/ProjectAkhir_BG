@@ -126,14 +126,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h2 class="m-0 text-dark">MAPS</h2>
+            <h2 class="m-0 text-dark">Dashboard</h2>
           </div><!-- /.col -->
-         <!--  <div class="col-sm-6">
+          <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
+              
             </ol>
-          </div> -->
+          </div>
           <!-- /.col -->
         </div><!-- /.row -->
 		
@@ -145,6 +146,15 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
+          <div id="maps_option" style="margin-left: 20px">
+            <p style="font-weight: bold;">Tampilan Peta : &nbsp
+            <select id="pilih" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" onchange="pilih_bg(this.value)">
+              <option value="osm">OpenStreet Map</option>
+              <option value="bing_aerialwithlabels">Bing Aerial (labels)</option>
+            </select>
+            </p>
+          </div>
+
           <div id="map" class="map" style="width: 100%;height:350px;"></div>
         </div>
 		

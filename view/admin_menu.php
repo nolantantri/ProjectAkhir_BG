@@ -34,88 +34,39 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-map-marker"></i>
-              <p>
-                Maps Option
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-
-            <ul class="nav nav-treeview" style="margin-left: 45px">
-              <li class="nav-item">
-                <select id="pilih" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" onchange="pilih_bg(this.value)">Select Your Maps
-                  <option value="osm">OpenStreet Map</option>
-                  <option value="bing_aerialwithlabels">Bing Aerial (labels)</option>
-                </select>
-              </li>      
-            </ul>
-          </li>
-
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="view/form_pointofinterest.php" class="nav-link">
               <i class="nav-icon fas fa-map-marker"></i>
               <p>
                 Data Point Of Interest
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-
-            <ul class="nav nav-treeview">
+          <!--   <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="index.php?page=form_tambah_pointofinterest" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah POI</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ubah POI</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Hapus POI</p>
-                </a>
-              </li>
-
-            </ul>
+            </ul> -->
           </li>
 
            <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="view/form_properti.php" class="nav-link">
               <i class="nav-icon fas fa-map-marker"></i>
               <p>
-                Data Property
-                <i class="right fas fa-angle-left"></i>
+                Data Properti
               </p>
             </a>
-
-            <ul class="nav nav-treeview">
+            <!-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="index.php?page=form_tambah_properti" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Property</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ubah Property</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Hapus Property</p>
-                </a>
-              </li>
-
-            </ul>
+            </ul> -->
           </li>
 
         </ul>
