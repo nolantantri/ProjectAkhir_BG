@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 			  <td>Geom 
-				<td>: <input type="text" name="geom" id="geom"></td>
+				<td>: <input type="text" name="geom_point" id="geom_point"></td>
 			</tr>
 		  </table><br>
 	  <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH</button>

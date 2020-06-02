@@ -33,7 +33,14 @@
   <link rel="stylesheet" href="css/ol.css" type="text/css">
   <!-- CSS untuk Maps -->
   <script src="js/ol.js" type="text/javascript"></script>
+  <!-- Bootstrap untuk Maps -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -191,20 +198,123 @@
 
 <!-- Script untuk mengatur Maps -->
 <script type="text/javascript">
-  // Variabel untuk menampung source bingmaps
+  // Style untuk WKT
+  var style_icon_wkt =new ol.style.Style({
+    image: new ol.style.Icon({
+      anchor: [0.5 , 1],
+      anchorXunits:'fraction',
+      anchorYunits: 'fraction',
+      src:'icons/meetups.png'
+    })
+  });
+
+
+	// Untuk menyimpan format WKT()
+  // WKT() : point, line, polygon (dalam bentuk string)
+	var format =  new ol.format.WKT();
+  var arr_feature = [];
+
+  //untuk wkt pemisah (x, y) adalah spasi => (x y)
+  var wkt = 'POINT (112.736 -7.276)';
+  // untuk membaca feature atau wkt yang kita tampung tadi
+  var titik_testing = format.readFeature(wkt, {
+    dataProjection: 'EPSG:4326',
+    featureProjection: 'EPSG:3857'
+  });
+  arr_feature[0] = titik_testing;
+
+  wkt = 'POINT (112.7730223 -7.2391486)';
+  // untuk membaca feature atau wkt yang kita tampung tadi
+  titik_testing = format.readFeature(wkt, {
+    dataProjection: 'EPSG:4326',
+    featureProjection: 'EPSG:3857'
+  });
+  arr_feature[1] = titik_testing;
+
+  var format =  new ol.format.WKT();
+  var feature;
+  var features_point=[];
+  var features_polygon=[];
+
+  // PHP Point 
+  <?php 
+  $sql = "SELECT * from point_of_interest";
+  $result = $koneksi->query($sql);
+  $i=0;
+  while ($r = $result->fetch_assoc()){
+  ?>
+    feature = format.readFeature('<?php echo $r['geom'] ?>',
+    {
+      dataProjection: 'EPSG:4326',
+      featureProjection: 'EPSG:3857'
+    });
+    feature.set('info','<?php echo $r['nama'] ?>');
+    features_point[<?php echo $i ?>]=feature; 
+  <?php  
+    $i++;
+    }
+  ?>
+
+  // PHP POLYGON
+  <?php 
+    $sql = "SELECT * from property";
+    $result = $koneksi->query($sql);
+    $i=0;
+    while($r = $result->fetch_assoc()) {  
+    ?>
+      feature = format.readFeature('<?php echo $r['geom'] ?>', 
+      {
+        dataProjection: 'EPSG:4326',
+        featureProjection: 'EPSG:3857'
+      });
+      feature.set('info','<?php echo $r['keterangan'] ?>');
+      features_polygon[<?php echo $i ?>]=feature;       
+    <?php
+       $i++;  
+      }
+    ?>
+
+  var arr_feature_contoh = [];
+  
+  // POINT
+	var source_point = new ol.source.Vector({
+     features: features_point
+	});
+  var contoh_point = new ol.layer.Vector({
+    source: source_point
+  });
+
+	var layer_point = new ol.layer.Vector({
+		source: new ol.source.Vector({
+      features:features_point
+    }),
+    style:style_icon_wkt
+	});
+
+
+  // POLYGON
+  var layer_polygon = new ol.layer.Vector({
+    source: new ol.source.Vector({
+      features:features_polygon
+    }),
+    // style:style_icon_wkt
+  });
+
+
+  // 1.Penampung source bingmaps
   var sourceBingMaps_AerialWithLabels = new ol.source.BingMaps({
     key: 'AjQ2yJ1-i-j_WMmtyTrjaZz-3WdMb2Leh_mxe9-YBNKk_mz1cjRC7-8ILM7WUVEu',
     imagerySet: 'AerialWithLabels',
   });
-  
-  // 1. Variabel untuk menampung Layer Tile Bing Map
+  // Variabel untuk menampung Layer Tile Bing Map
   // Dipanggil untuk di layer[...]
   var bing_AerialWithLabels = new ol.layer.Tile({
     preload: Infinity,
     source: sourceBingMaps_AerialWithLabels,
     visible: false,
   });
-  // 2. Variabel untuk menampung Layer Tile OSM
+
+  // 2.Penampung Layer Tile OSM
   // Dipanggil untuk di layer[...]
   var osm = new ol.layer.Tile({
     source: new ol.source.OSM(),
@@ -223,13 +333,18 @@
     }
   }
 
-  // Membuat Object map
+  // Membuat Object Pembentuk Peta
   var map = new ol.Map({
     target: 'map',
-    // Dengan 1 layer dari OSM atau bing_aerial
+    // Dengan 1 layer dari OSM atau bing_aerial(label)
     layers: [
       osm,
-      bing_AerialWithLabels,
+      bing_AerialWithLabels,   
+     
+      layer_point,
+      layer_polygon,
+
+      contoh_point,
     ],
     controls:[
       //Define the default controls
@@ -250,63 +365,46 @@
     })
   });
 
-	//tambah POI dan PROPERTIES event
-	var format =  new ol.format.WKT();
-
-
-	var source_point = new ol.source.Vector({
-
-	});
-  
-  var source_polygon = new ol.source.Vector({
-  
-  });
-	
-	var layer_point = new ol.layer.Vector({
-		source: source_point
-	});
-
-  var draw_point = new ol.interaction.Draw({
-    source: source_point,
-    type: 'Point'
-  });
-  
-  var draw_polygon = new ol.interaction.Draw({
-    source: source_polygon,
-    type: 'Polygon'
-  });
 
   function on_digit(type) {
     var draw = "";
-    if(type=="polygon")
+    if(type=="point")
     {
-      draw = draw_polygon;
+      draw = new ol.interaction.Draw({
+        source: source_point,
+        type: 'Point'
+      });
     }
-    else if(type=="point")
+    else 
     {
-      draw = draw_point;
+      draw = new ol.interaction.Draw({
+        source: source_point,
+        type: 'Polygon'
+      });
     }
-
+   
     // Fungsi untuk mengaktifkan kursor digitasi
     map.addInteraction(draw);
-    draw.on('drawend', function(evt){
+      draw.on('drawend', function(evt){
+      // Hapus source point dan polygon
+      source_point.refresh({force:true});
+      
       var feature = evt.feature;
       var geom = feature.getGeometry().clone();
       geom = geom.transform('EPSG:3857','EPSG:4326');
       var wkt  = format.writeGeometry(geom);
-      
-
-      if(type=="polygon")
+    
+      if(type=="point")
       {
-        $('#geom').val(wkt);
+        $('#geom_point').val(wkt);
       }
-      else if(type=="point")
+      else 
       {
-         map.removeInteraction(draw);
-         $('#geom').val(wkt);
-      }    
+        $('#geom_polygon').val(wkt);
+      }
     });
   } 
+
 </script>
 
 

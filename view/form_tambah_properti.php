@@ -58,7 +58,7 @@
 			</tr>
 			<tr>
 			  <td>Geom 
-				<td>: <input type="text" name="geom" id="geom"></td>
+				<td>: <input type="text" name="geom_polygon" id="geom_polygon"></td>
 			</tr>
 			<tr>
 			  <td>Keterangan</td>
