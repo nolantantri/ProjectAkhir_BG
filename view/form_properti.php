@@ -225,7 +225,7 @@
                   <td>Edit | Delete</td>
                 </tr> 
               </table><br>
-              <a class="btn btn-primary" href="form_tambah_properti.php">TAMBAH</a>
+              <a class="btn btn-primary" href="form_tambah_properti.php">TAMBAH PROPERTI</a>
             </div>
 
           <div id="maps_option" style="margin-left: 20px;">

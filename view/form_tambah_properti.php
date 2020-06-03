@@ -256,7 +256,7 @@
 					</tr>
 					<tr>
 					  	<td>Geom</td>
-						<td>: <input type="text" name="geom_polygon" id="geom_polygon"></td>
+						<td>: <textarea name="geom_polygon" id="geom_polygon" disabled></textarea></td>
 					</tr>
 					<tr>
 						<td>Upload Gambar</td>
@@ -267,7 +267,7 @@
 					  <td>: <textarea name="keterangan" id="keterangan" style="width: 253px"></textarea></td>
 					</tr>
 				  </table><br>
-			  <button class="btn btn-primary" id="btnSubmit" name="addProperti">TAMBAH</button>
+			  <button class="btn btn-primary" id="btnSubmit" name="addProperti">TAMBAH DATA</button>
 			</div>
 		</form>
 

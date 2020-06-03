@@ -233,10 +233,10 @@
             </tr>
             <tr>
               <td>Geom 
-              <td>: <input type="text" name="geom_point" id="geom_point"></td>
+              <td>: <textarea name="geom_point" id="geom_point" disabled></textarea></td>
             </tr>
             </table><br>
-          <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH</button>
+          <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH DATA</button>
         </div>
       </form>
 
