@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2020 at 11:12 AM
+-- Generation Time: Jun 03, 2020 at 04:33 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -25,13 +25,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar_property`
+-- Table structure for table `gambar_properti`
 --
 
-CREATE TABLE `gambar_property` (
+CREATE TABLE `gambar_properti` (
   `idgambar` int(11) NOT NULL,
   `extension` varchar(5) NOT NULL,
-  `properti_idproperti` int(11) NOT NULL
+  `idproperti` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -84,11 +84,11 @@ CREATE TABLE `user` (
 --
 
 --
--- Indexes for table `gambar_property`
+-- Indexes for table `gambar_properti`
 --
-ALTER TABLE `gambar_property`
+ALTER TABLE `gambar_properti`
   ADD PRIMARY KEY (`idgambar`),
-  ADD KEY `fk_gambar_property_property_idx` (`properti_idproperti`);
+  ADD KEY `fk_gambar_property_property_idx` (`idproperti`);
 
 --
 -- Indexes for table `point_of_interest`
@@ -113,9 +113,9 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `gambar_property`
+-- AUTO_INCREMENT for table `gambar_properti`
 --
-ALTER TABLE `gambar_property`
+ALTER TABLE `gambar_properti`
   MODIFY `idgambar` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -141,10 +141,10 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `gambar_property`
+-- Constraints for table `gambar_properti`
 --
-ALTER TABLE `gambar_property`
-  ADD CONSTRAINT `fk_gambar_property_property` FOREIGN KEY (`properti_idproperti`) REFERENCES `properti` (`idproperti`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `gambar_properti`
+  ADD CONSTRAINT `fk_gambar_property_property` FOREIGN KEY (`idproperti`) REFERENCES `properti` (`idproperti`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
