@@ -1,6 +1,15 @@
 <?php 
 	require('../connect.php');
 
+	function folder_exist($folder) {
+	   $path = realpath($folder);
+
+	   if($path !== false AND is_dir($path)) {
+	   		return $path;
+	   }
+	   return false;
+	}
+
 	$kategori_transaksi= $_POST['kategori_transaksi'];
 	$jenis_properti= $_POST['jenis_properti'];
 	$harga= $_POST['harga'];
@@ -20,31 +29,36 @@
 		{
 			if(file_exists($_FILES['gambar']['tmp_name'][0]))
 			{
-				$sql2 = "SELECT * FROM properti ORDER BY idproperti DESC LIMIT 1";
-				$query = $koneksi->query($sql2);
-				$hasil2 = $query->fetch_assoc();
-				$id_properti = $hasil2['idproperti'];
+				$id_properti = $koneksi->insert_id;
 
 				$total = count($_FILES['gambar']['name']);
-				for($i=0; $i<$n; $i++){
+				for($i=0; $i<$total; $i++)
+				{
+					$path = "../img";
+					if(!folder_exist($path)){
+						mkdir($path,0777);
+					}
+
 		    		$idgambar = 1;
-		    		$sql3 = "SELECT * FROM gambar_properti ORDER BY idgambar DESC LIMIT 1";
-		    		$hasil3 = $connection->query($sql3);
-			    	if($hasil3->num_rows > 0){
-			    		while($r2 = $hasil3->fetch_assoc()){
-			    			$idgambar = $r2['idgambar']+1;
+		    		$sql2 = "SELECT * FROM gambar_properti ORDER BY idgambar DESC LIMIT 1";
+		    		$hasil2 = $koneksi->query($sql2);
+			    	if($hasil2->num_rows > 0){
+			    		while($row = $hasil2->fetch_assoc()){
+			    			$idgambar = $row['idgambar']+1;
 			    		}
 			    	}
 
+			    
+
 			    	$ext = pathinfo($_FILES['gambar']['name'][$i], PATHINFO_EXTENSION);
-			    	$newfilename = $idgambar.".".$ext;
-					$destination = "img/".$newfilename;
+			    	$namagambarterbaru = $idgambar.".".$ext;
+					$destination = $path."/".$namagambarterbaru;
 					move_uploaded_file($_FILES['gambar']['tmp_name'][$i], $destination);
 
-					$sql4 = "INSERT INTO gambar_properti VALUES('$idgambar', '$ext', '$idProperti')";
-					if($connection->query($sql4) === FALSE)
+					$sql3 = "INSERT INTO gambar_properti VALUES('$idgambar', '$ext', '$id_properti')";
+					if($koneksi->query($sql3) === FALSE)
 					{
-						echo $connection->error;
+						echo $koneksi->error;
 					}
 			    }
 			}

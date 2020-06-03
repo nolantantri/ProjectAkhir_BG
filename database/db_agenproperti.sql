@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2020 at 04:33 PM
+-- Generation Time: Jun 03, 2020 at 07:00 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -34,6 +34,13 @@ CREATE TABLE `gambar_properti` (
   `idproperti` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `gambar_properti`
+--
+
+INSERT INTO `gambar_properti` (`idgambar`, `extension`, `idproperti`) VALUES
+(1, 'jpg', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,13 @@ CREATE TABLE `point_of_interest` (
   `jenis_pointofinterest` enum('mall','sekolah','pasar','tempat wisata','restoran') NOT NULL,
   `geom` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `point_of_interest`
+--
+
+INSERT INTO `point_of_interest` (`idpoi`, `nama`, `jenis_pointofinterest`, `geom`) VALUES
+(1, 'Universitas Surabaya', 'sekolah', 'POINT(112.76817144381619 -7.320250475843466)');
 
 -- --------------------------------------------------------
 
@@ -65,6 +79,13 @@ CREATE TABLE `properti` (
   `keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `properti`
+--
+
+INSERT INTO `properti` (`idproperti`, `kategori_transaksi`, `jenis_property`, `harga`, `alamat`, `luastanah`, `luasbangunan`, `geom`, `keterangan`) VALUES
+(1, 'jual', 'rumah', '250000000', 'Jl. Tenggilis Mejoyo', 500, 150, 'POLYGON((112.76487556974143 -7.319819605450348,112.76488375512402 -7.320347319027945,112.76608700636336 -7.320436624340843,112.76613611865884 -7.319917029542438,112.76487556974143 -7.319819605450348))', 'Rumah dijual daerah surbaya selatan');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +99,13 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `salt` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`iduser`, `username`, `nama`, `password`, `salt`) VALUES
+(1, 'admin', 'Super Admin', 'e81d6f4cce4e86f23d5c40c6ad36bd35', 'btgobgrstP');
 
 --
 -- Indexes for dumped tables
@@ -113,28 +141,22 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `gambar_properti`
---
-ALTER TABLE `gambar_properti`
-  MODIFY `idgambar` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `point_of_interest`
 --
 ALTER TABLE `point_of_interest`
-  MODIFY `idpoi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpoi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `properti`
 --
 ALTER TABLE `properti`
-  MODIFY `idproperti` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproperti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

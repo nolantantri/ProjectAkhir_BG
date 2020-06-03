@@ -204,7 +204,7 @@
           <div id="map" class="map" style="width: 100%;height:350px;"></div>
         </div>
 
-        <form method="POST" action="../proses/tambah_properti_proses.php">
+        <form method="POST" action="../proses/tambah_properti_proses.php" enctype="multipart/form-data">
 			<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
 			  <!-- <h1 class="display-4">TAMBAH POINT OF INTEREST</h1><br> -->
 			  <h2 class="m-0 text-dark">TAMBAH PROPERTI</h2>

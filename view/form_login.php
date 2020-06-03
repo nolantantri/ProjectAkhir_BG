@@ -30,7 +30,7 @@
 
       <form method="POST" action="../proses/login_proses.php">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+          <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="admin">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="admin">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
