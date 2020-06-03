@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2020 at 06:10 PM
+-- Generation Time: Jun 03, 2020 at 11:12 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -30,9 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `gambar_property` (
   `idgambar` int(11) NOT NULL,
-  `namagambar` varchar(45) NOT NULL,
   `extension` varchar(5) NOT NULL,
-  `property_idproperty` int(11) NOT NULL
+  `properti_idproperti` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -42,7 +41,7 @@ CREATE TABLE `gambar_property` (
 --
 
 CREATE TABLE `point_of_interest` (
-  `idPOI` int(11) NOT NULL,
+  `idpoi` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jenis_pointofinterest` enum('mall','sekolah','pasar','tempat wisata','restoran') NOT NULL,
   `geom` varchar(10000) NOT NULL
@@ -51,17 +50,15 @@ CREATE TABLE `point_of_interest` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `property`
+-- Table structure for table `properti`
 --
 
-CREATE TABLE `property` (
-  `idproperty` int(11) NOT NULL,
+CREATE TABLE `properti` (
+  `idproperti` int(11) NOT NULL,
   `kategori_transaksi` enum('jual','beli') NOT NULL,
   `jenis_property` enum('rumah','ruko','gudang','kantor','tanah') NOT NULL,
   `harga` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
-  `kelurahan` varchar(45) NOT NULL,
-  `kecamatan` varchar(45) NOT NULL,
   `luastanah` double NOT NULL,
   `luasbangunan` double NOT NULL,
   `geom` varchar(10000) NOT NULL,
@@ -91,19 +88,19 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `gambar_property`
   ADD PRIMARY KEY (`idgambar`),
-  ADD KEY `fk_gambar_property_property_idx` (`property_idproperty`);
+  ADD KEY `fk_gambar_property_property_idx` (`properti_idproperti`);
 
 --
 -- Indexes for table `point_of_interest`
 --
 ALTER TABLE `point_of_interest`
-  ADD PRIMARY KEY (`idPOI`);
+  ADD PRIMARY KEY (`idpoi`);
 
 --
--- Indexes for table `property`
+-- Indexes for table `properti`
 --
-ALTER TABLE `property`
-  ADD PRIMARY KEY (`idproperty`);
+ALTER TABLE `properti`
+  ADD PRIMARY KEY (`idproperti`);
 
 --
 -- Indexes for table `user`
@@ -125,13 +122,13 @@ ALTER TABLE `gambar_property`
 -- AUTO_INCREMENT for table `point_of_interest`
 --
 ALTER TABLE `point_of_interest`
-  MODIFY `idPOI` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpoi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `property`
+-- AUTO_INCREMENT for table `properti`
 --
-ALTER TABLE `property`
-  MODIFY `idproperty` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `properti`
+  MODIFY `idproperti` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -147,7 +144,7 @@ ALTER TABLE `user`
 -- Constraints for table `gambar_property`
 --
 ALTER TABLE `gambar_property`
-  ADD CONSTRAINT `fk_gambar_property_property` FOREIGN KEY (`property_idproperty`) REFERENCES `property` (`idproperty`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_gambar_property_property` FOREIGN KEY (`properti_idproperti`) REFERENCES `properti` (`idproperti`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
