@@ -267,7 +267,7 @@
 
   // PHP POLYGON
   <?php 
-    $sql = "SELECT * from property";
+    $sql = "SELECT * from properti";
     $result = $koneksi->query($sql);
     $i=0;
     while($r = $result->fetch_assoc()) {  

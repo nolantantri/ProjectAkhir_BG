@@ -203,9 +203,9 @@
            <div class="tabledata" style="width: 100%;text-align: center;">
                <table class="table" width="100%">
                 <tr class="text-center">
-                  <th>No</th>
+                  <th>Id</th>
+                  <th>Nama Point</th>
                   <th>Jenis</th>
-                  <th>Nama</th>
                   <th>Action</th>
                 </tr>
                 <tr class="text-center">

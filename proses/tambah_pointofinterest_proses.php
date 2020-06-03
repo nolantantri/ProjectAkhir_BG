@@ -18,7 +18,7 @@
 		}
 		else
 		{
-			echo "<script type='text/javascript'> alert('Terjadi Kesalahan dalam menambahkan data point of interest.');window.location.href='../view/form_tambah_pointofinterest.php'</script>";
+			echo $koneksi->error;
 		}
 	}
 	else
