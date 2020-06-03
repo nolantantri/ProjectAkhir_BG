@@ -256,7 +256,7 @@
 					</tr>
 					<tr>
 					  	<td>Geom</td>
-						<td>: <textarea name="geom_polygon" id="geom_polygon" disabled></textarea></td>
+						<td>: <textarea name="geom_polygon" id="geom_polygon"></textarea></td>
 					</tr>
 					<tr>
 						<td>Upload Gambar</td>
@@ -334,7 +334,6 @@
     source: new ol.source.Vector({
       features:features_polygon
     }),
-    // style:style_icon_wkt
   });
 
 

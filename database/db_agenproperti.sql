@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2020 at 07:00 PM
+-- Generation Time: Jun 03, 2020 at 07:46 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -70,7 +70,7 @@ INSERT INTO `point_of_interest` (`idpoi`, `nama`, `jenis_pointofinterest`, `geom
 CREATE TABLE `properti` (
   `idproperti` int(11) NOT NULL,
   `kategori_transaksi` enum('jual','beli') NOT NULL,
-  `jenis_property` enum('rumah','ruko','gudang','kantor','tanah') NOT NULL,
+  `jenis_properti` enum('rumah','ruko','gudang','kantor','tanah') NOT NULL,
   `harga` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
   `luastanah` double NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `properti` (
 -- Dumping data for table `properti`
 --
 
-INSERT INTO `properti` (`idproperti`, `kategori_transaksi`, `jenis_property`, `harga`, `alamat`, `luastanah`, `luasbangunan`, `geom`, `keterangan`) VALUES
+INSERT INTO `properti` (`idproperti`, `kategori_transaksi`, `jenis_properti`, `harga`, `alamat`, `luastanah`, `luasbangunan`, `geom`, `keterangan`) VALUES
 (1, 'jual', 'rumah', '250000000', 'Jl. Tenggilis Mejoyo', 500, 150, 'POLYGON((112.76487556974143 -7.319819605450348,112.76488375512402 -7.320347319027945,112.76608700636336 -7.320436624340843,112.76613611865884 -7.319917029542438,112.76487556974143 -7.319819605450348))', 'Rumah dijual daerah surbaya selatan');
 
 -- --------------------------------------------------------

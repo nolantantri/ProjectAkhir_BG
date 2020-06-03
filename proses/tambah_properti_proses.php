@@ -22,7 +22,7 @@
 
 	if($kategori_transaksi!="" && $jenis_properti!="" && $harga!="" && $alamat!="" && $luas_tanah!="" && $luas_bangunan!="" && $geom!="" && $keterangan!="")
 	{
-		$sql1 = "INSERT INTO properti(kategori_transaksi,jenis_property,harga,alamat,luastanah,luasbangunan,geom,keterangan) 
+		$sql1 = "INSERT INTO properti(kategori_transaksi,jenis_properti,harga,alamat,luastanah,luasbangunan,geom,keterangan) 
 		        VALUES('$kategori_transaksi','$jenis_properti','$harga','$alamat','$luas_tanah','$luas_bangunan','$geom','$keterangan')";
 		$hasil1= $koneksi->query($sql1);
 		if($hasil1)

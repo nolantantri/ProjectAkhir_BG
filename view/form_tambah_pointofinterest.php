@@ -233,7 +233,7 @@
             </tr>
             <tr>
               <td>Geom 
-              <td>: <textarea name="geom_point" id="geom_point" disabled></textarea></td>
+              <td>: <textarea name="geom_point" id="geom_point"></textarea></td>
             </tr>
             </table><br>
           <button class="btn btn-primary" id="btnSubmit" name="addpoi">TAMBAH DATA</button>
