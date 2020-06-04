@@ -241,11 +241,11 @@
 					</tr>
 					<tr>
 					  <td>Luas Tanah</td>
-					  <td>: <input type="text" name="luas_tanah" id="luas_tanah"> m2</td>
+					  <td>: <input type="text" name="luas_tanah" id="luas_tanah"> meter<sup> 2</sup></td>
 					</tr>
 					<tr>
 					  <td>Luas Bangunan</td>
-					  <td>: <input type="text" name="luas_bangunan" id="luas_bangunan"> m2</td>
+					  <td>: <input type="text" name="luas_bangunan" id="luas_bangunan"> meter<sup> 2</sup></td>
 					</tr>
 					<tr>
 					  <td>Pasang Point &nbsp</td>

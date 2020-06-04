@@ -203,17 +203,32 @@
            <div class="tabledata" style="width: 100%;text-align: center;">
                <table class="table" width="100%">
                 <tr class="text-center">
-                  <th>Id</th>
+                  <th>No.</th>
                   <th>Nama Point</th>
                   <th>Jenis</th>
                   <th>Action</th>
                 </tr>
-                <tr class="text-center">
-                  <td>Data Coba 1</td>
-                  <td>Data Coba 2</td>
-                  <td>Data Coba 3</td>
-                  <td>Edit | Delete</td>
-                </tr> 
+                <?php 
+                $sql = "SELECT * FROM point_of_interest";
+                $hasil = $koneksi->query($sql);
+                $i = 1;
+                while ($row= $hasil->fetch_array()) {
+                  ?>
+                  <tr class="text-center">
+                    <td><?php echo $i."."; ?></td>
+                    <td><?php echo $row['nama']; ?></td>
+                    <td><?php echo $row['jenis_pointofinterest']; ?></td>
+                    <td>
+                      <?php 
+                      echo "<a class='btn btn-warning' href='#'>UBAH</a> &nbsp
+                            <a class='btn btn-danger' href='../proses/hapus_pointofinterest_proses.php?id=".$row['idpoi']."'>HAPUS</a>";
+                       ?>
+                    </td>
+                  </tr>
+                  <?php 
+                  $i++;
+                }
+                   ?>
               </table><br>
               <a class="btn btn-primary" href="form_tambah_pointofinterest.php">TAMBAH POINT OF INTEREST</a>
             </div>

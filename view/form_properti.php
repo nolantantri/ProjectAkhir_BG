@@ -213,17 +213,40 @@
                   <th>Keterangan</th>
                   <th>Action</th>
                 </tr>
-                <tr class="text-center">
-                  <td>Data Coba 1</td>
-                  <td>Data Coba 2</td>
-                  <td>Data Coba 3</td>
-                  <td>Data Coba 4</td>
-                  <td>Data Coba 5</td>
-                  <td>Data Coba 8</td>
-                  <td>Data Coba 9</td>
-                  <td>Data Coba 10</td>
-                  <td>Edit | Delete</td>
-                </tr> 
+                <?php 
+                function rupiah($angka)
+                {
+                  $hasilrupiah ="Rp ".number_format($angka,2,',','.');
+                  return $hasilrupiah;
+                }
+
+
+                $sql = "SELECT * FROM properti";
+                $hasil = $koneksi->query($sql);
+                $i=1;
+
+                while ($row= $hasil->fetch_array()) {
+                  ?>
+                  <tr class="text-center">
+                    <td><?php echo $i."."; ?></td>
+                    <td><?php echo $row['kategori_transaksi']; ?></td>
+                    <td><?php echo $row['jenis_properti']; ?></td>
+                    <td><?php echo rupiah($row['harga']); ?></td>
+                    <td><?php echo $row['alamat']; ?></td>
+                    <td><?php echo $row['luastanah']." m<sup>2</sup>"; ?></td>
+                    <td><?php echo $row['luasbangunan']." m<sup>2</sup>"; ?></td>
+                    <td><?php echo $row['keterangan']; ?></td>
+                    <td>
+                      <?php 
+                      echo "<a class='btn btn-warning' href='#'>UBAH</a> &nbsp
+                            <a class='btn btn-danger' href='../proses/hapus_properti_proses.php?id=".$row['idproperti']."'>HAPUS</a>";
+                       ?>
+                    </td>
+                  </tr>
+                  <?php 
+                  $i++;
+                }
+                   ?>
               </table><br>
               <a class="btn btn-primary" href="form_tambah_properti.php">TAMBAH PROPERTI</a>
             </div>

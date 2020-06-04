@@ -58,7 +58,7 @@
 					$sql3 = "INSERT INTO gambar_properti VALUES('$idgambar', '$ext', '$id_properti')";
 					if($koneksi->query($sql3) === FALSE)
 					{
-						echo $koneksi->error;
+						echo "Error: ".$koneksi->error;
 					}
 			    }
 			}

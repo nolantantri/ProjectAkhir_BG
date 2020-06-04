@@ -18,7 +18,7 @@
 		}
 		else
 		{
-			echo $koneksi->error;
+			echo "Error: ".$koneksi->error;
 		}
 	}
 	else
