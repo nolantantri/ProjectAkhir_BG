@@ -154,8 +154,10 @@
             </select>
             </p>
           </div>
-
-          <div id="map" class="map" style="width: 100%;height:350px;"></div>
+          <!-- <div id="map" class="map" style="width: 100%;height:350px;"></div> -->
+          
+          <iframe width="100%" height="500" src="https://www.youtube.com/embed/2cgMU8qLLIE?t=8" allow="autoplay">
+          </iframe>
         </div>
 		
 		<?php
