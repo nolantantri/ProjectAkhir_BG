@@ -220,7 +220,7 @@
                     <td><?php echo $row['jenis_pointofinterest']; ?></td>
                     <td>
                       <?php 
-                      echo "<a class='btn btn-warning' href='#'>UBAH</a> &nbsp
+                      echo "<a class='btn btn-warning' href='form_ubah_pointofinterest.php?id=".$row['idpoi']."'>UBAH</a> &nbsp
                             <a class='btn btn-danger' href='../proses/hapus_pointofinterest_proses.php?id=".$row['idpoi']."'>HAPUS</a>";
                        ?>
                     </td>

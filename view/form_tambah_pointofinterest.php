@@ -187,6 +187,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="../view/form_pointofinterest.php">Data Point Of Interest</a></li>
               <li class="breadcrumb-item active">Tambah Data POI</li>
             </ol>
           </div>
