@@ -2,11 +2,7 @@
    if(isset($_GET['id']))
    {
     $id = $_GET['id'];
-    $nama_pontiofinterest="";
-    $jenis_pointofinterest="";
-    $geom="";
-
-
+    
     $sql = "SELECT * FROM point_of_interest WHERE idpoi=".$id;
     $hasil = $koneksi->query($sql);
 

@@ -322,22 +322,13 @@
   var feature;
   var features_polygon=[];
   
-  // POINT
+  // POLYGON
   var source_polygon = new ol.source.Vector({
      features: features_polygon
   });
   var contoh_polygon = new ol.layer.Vector({
     source: source_polygon
   });
-
-  // POLYGON
-  var layer_polygon = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      features:features_polygon
-    }),
-  });
-
-
   
   // 1.Penampung Layer Tile OSM
   // Dipanggil untuk di layer[...]
@@ -346,16 +337,12 @@
     visible: true,
   });
 
-  
-
   // Membuat Object Pembentuk Peta
   var map = new ol.Map({
     target: 'map',
     // Dengan 1 layer dari OSM atau bing_aerial(label)
     layers: [
       osm,
-    
-      layer_polygon,
       contoh_polygon,
     ],
     controls:[
@@ -402,6 +389,7 @@
       if(type=="polygon")
       {
         $('#geom_polygon').val(wkt);
+        map.removeInteraction(draw);
       }
     });
   } 

@@ -238,7 +238,7 @@
                     <td><?php echo $row['keterangan']; ?></td>
                     <td>
                       <?php 
-                      echo "<a class='btn btn-warning' href=href='form_ubah_properti.php?id=".$row['idpoi']."'>UBAH</a> &nbsp
+                      echo "<a class='btn btn-warning' href='form_ubah_properti.php?id=".$row['idproperti']."'>UBAH</a> &nbsp
                             <a class='btn btn-danger' href='../proses/hapus_properti_proses.php?id=".$row['idproperti']."'>HAPUS</a>";
                        ?>
                     </td>

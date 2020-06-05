@@ -48,8 +48,6 @@
 			    		}
 			    	}
 
-			    
-
 			    	$ext = pathinfo($_FILES['gambar']['name'][$i], PATHINFO_EXTENSION);
 			    	$namagambarterbaru = $idgambar.".".$ext;
 					$destination = $path."/".$namagambarterbaru;

@@ -439,6 +439,7 @@
       if(type=="point")
       {
         $('#geom_point').val(wkt);
+        map.removeInteraction(draw);
       }
     });
   } 
