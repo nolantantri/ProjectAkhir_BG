@@ -147,16 +147,16 @@
             <a href="form_pointofinterest.php" class="nav-link">
               <i class="nav-icon fas fa-map-marker"></i>
               <p>
-                Data Point Of Interest
+                Point Of Interest
               </p>
             </a>
           </li>
 
            <li class="nav-item has-treeview">
             <a href="form_properti.php" class="nav-link">
-              <i class="nav-icon fas fa-map-marker"></i>
+              <i class="nav-icon fas fa-object-group"></i>
               <p>
-                Data Property
+                Properti
               </p>
             </a>
           </li>
