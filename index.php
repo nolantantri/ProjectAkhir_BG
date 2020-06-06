@@ -208,108 +208,394 @@
 
 <!-- Script untuk mengatur Maps -->
 <script type="text/javascript">
-  // Style untuk WKT
-  var style_icon_wkt =new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5 , 1],
-      anchorXunits:'fraction',
-      anchorYunits: 'fraction',
-      src:'icons/meetups.png'
-    })
-  });
+  // I. POINT OF INTEREST
+  // START STYLE
+      // Style untuk Mall
+      var style_icon_mall =new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5 , 1],
+          anchorXunits:'fraction',
+          anchorYunits: 'fraction',
+          src:'icons/fashion.png'
+        })
+      });
+      // Style untuk Sekolah
+      var style_icon_sekolah =new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5 , 1],
+          anchorXunits:'fraction',
+          anchorYunits: 'fraction',
+          src:'icons/schools.png'
+        })
+      });
+      // Style untuk Pasar
+      var style_icon_pasar =new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5 , 1],
+          anchorXunits:'fraction',
+          anchorYunits: 'fraction',
+          src:'icons/shopping.png'
+        })
+      });
+     // Style untuk Tempat Wisata
+     var style_icon_wisata =new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5 , 1],
+          anchorXunits:'fraction',
+          anchorYunits: 'fraction',
+          src:'icons/tours.png'
+        })
+      });
+     // Style untuk Tempat Restaurant
+     var style_icon_restaurant =new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5 , 1],
+          anchorXunits:'fraction',
+          anchorYunits: 'fraction',
+          src:'icons/restaurants.png'
+        })
+      });
+  // END START STYLE
 
+  // START FUNCTION JENIS ICON
+    var jenis_icons = function(){
+      return function(feature, resolution){
+        if (feature.get('jenis') == "mall") 
+        {
+          return [style_icon_mall]
+        }
+        else if (feature.get('jenis') == "sekolah")
+        {
+          return [style_icon_sekolah]
+        }
+        else if (feature.get('jenis') == "pasar") 
+        {
+          return [style_icon_pasar]
+        }
+        else if (feature.get('jenis')== "tempat wisata")
+        {
+          return [style_icon_wisata]
+        }
+        else if (feature.get('jenis') == "restoran")
+        {
+          return [style_icon_restaurant]
+        }
+      };
+    };
+  // END START FUNCTION JENIS ICON
 
-	// Untuk menyimpan format WKT()
+  // Untuk menyimpan format WKT()
   // WKT() : point, line, polygon (dalam bentuk string)
-	var format =  new ol.format.WKT();
-  var arr_feature = [];
-
-  //untuk wkt pemisah (x, y) adalah spasi => (x y)
-  var wkt = 'POINT (112.736 -7.276)';
-  // untuk membaca feature atau wkt yang kita tampung tadi
-  var titik_testing = format.readFeature(wkt, {
-    dataProjection: 'EPSG:4326',
-    featureProjection: 'EPSG:3857'
-  });
-  arr_feature[0] = titik_testing;
-
-  wkt = 'POINT (112.7730223 -7.2391486)';
-  // untuk membaca feature atau wkt yang kita tampung tadi
-  titik_testing = format.readFeature(wkt, {
-    dataProjection: 'EPSG:4326',
-    featureProjection: 'EPSG:3857'
-  });
-  arr_feature[1] = titik_testing;
-
   var format =  new ol.format.WKT();
   var feature;
-  var features_point=[];
-  var features_polygon=[];
+  // POINT 
+  var features_point_mall=[];
+  var features_point_sekolah=[];
+  var features_point_pasar=[];
+  var features_point_wisata=[];
+  var features_point_restoran=[];
+  
+  // POLYGON
+  var features_polygon_rumah=[];
+  var features_polygon_ruko=[];
+  var features_polygon_gudang=[];
+  var features_polygon_kantor=[];
+  var features_polygon_tanah=[];
 
-  // PHP Point 
-  <?php 
-  $sql = "SELECT * from point_of_interest";
-  $result = $koneksi->query($sql);
-  $i=0;
-  while ($r = $result->fetch_assoc()){
-  ?>
-    feature = format.readFeature('<?php echo $r['geom'] ?>',
-    {
-      dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857'
-    });
-    feature.set('info','<?php echo $r['nama'] ?>');
-    features_point[<?php echo $i ?>]=feature; 
-  <?php  
-    $i++;
-    }
-  ?>
 
-  // PHP POLYGON
-  <?php 
-    $sql = "SELECT * from properti";
+  // START PHP POINT 
+    <?php 
+    $sql = "SELECT * from point_of_interest";
     $result = $koneksi->query($sql);
-    $i=0;
-    while($r = $result->fetch_assoc()) {  
+
+    $i_mall=0;
+    $i_sekolah=0;
+    $i_pasar=0;
+    $i_wisata=0;
+    $i_restoran=0;
+
+    while ($r = $result->fetch_assoc()){
+      $jenisTempat= $r['jenis_pointofinterest'];
     ?>
-      feature = format.readFeature('<?php echo $r['geom'] ?>', 
+      feature = format.readFeature('<?php echo $r['geom'] ?>',
       {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
       });
-      feature.set('info','<?php echo $r['keterangan'] ?>');
-      features_polygon[<?php echo $i ?>]=feature;       
-    <?php
-       $i++;  
+      feature.set('nama','<?php echo $r['nama'] ?>');
+      feature.set('jenispoi','<?php echo $r['jenis_pointofinterest'] ?>');
+      feature.set('geom','<?php echo $r['geom'] ?>');
+
+    <?php  
+      if($jenisTempat == "mall" )
+      {
+        ?>
+        features_point_mall[<?php echo $i_mall; ?>]=feature;
+        <?php  
+        $i_mall++;
       }
+      else if($jenisTempat == "sekolah")
+      {
+        ?>
+        features_point_sekolah[<?php echo $i_sekolah; ?>]=feature;
+        <?php  
+        $i_sekolah++;
+      }
+      else if($jenisTempat=="pasar")
+      {
+        ?>
+        features_point_pasar[<?php echo $i_pasar; ?>]=feature;
+        <?php  
+        $i_pasar++;
+      }
+      else if($jenisTempat=="tempat wisata")
+      {
+        ?>
+        features_point_wisata[<?php echo $i_wisata; ?>]=feature;
+        <?php  
+        $i_wisata++;
+      }
+      else if ($jenisTempat=="restoran")
+      {
+        ?>
+        features_point_restoran[<?php echo $i_restoran; ?>]=feature;
+        <?php  
+        $i_restoran++;
+      }
+    }
     ?>
+  // END START PHP POINT
 
-  var arr_feature_contoh = [];
+  // START SOURCE POINT MALL, SEKOLAH, ETC.
+    // POINT MALL
+    var source_point_mall = new ol.source.Vector({
+       features: features_point_mall
+    });
+    var contoh_point_mall = new ol.layer.Vector({
+      source: source_point_mall,
+      style:style_icon_mall
+    });
+
+    // POINT SEKOLAH
+    var source_point_sekolah = new ol.source.Vector({
+       features: features_point_sekolah
+    });
+    var contoh_point_sekolah = new ol.layer.Vector({
+      source: source_point_sekolah,
+      style:style_icon_sekolah
+    });
+
+    // POINT PASAR
+    var source_point_pasar = new ol.source.Vector({
+       features: features_point_pasar
+    });
+    var contoh_point_pasar = new ol.layer.Vector({
+      source: source_point_pasar,
+      style:style_icon_pasar
+    });
+
+    // POINT WISATA
+    var source_point_wisata = new ol.source.Vector({
+       features: features_point_wisata
+    });
+    var contoh_point_wisata = new ol.layer.Vector({
+      source: source_point_wisata,
+      style:style_icon_wisata
+    });
+
+    // POINT RESTORAN
+    var source_point_restoran = new ol.source.Vector({
+       features: features_point_restoran
+    });
+    var contoh_point_restoran = new ol.layer.Vector({
+      source: source_point_restoran,
+      style:style_icon_restaurant
+    });
+  // END START SOURCE POINT MALL, SEKOLAH, ETC.
+
   
-  // POINT
-	var source_point = new ol.source.Vector({
-     features: features_point
-	});
-  var contoh_point = new ol.layer.Vector({
-    source: source_point
-  });
+  // II. PROPERTI
+  // START STYLE WARNA 
+    // untuk garis berwarna hitam putus-putus (border)
+    var stroke_black = new ol.style.Stroke({
+      color:'black',
+      width:1
+    }); 
 
-	var layer_point = new ol.layer.Vector({
-		source: new ol.source.Vector({
-      features:features_point
-    }),
-    style:style_icon_wkt
-	});
+    // Warna merah tranparant 0.3 
+    var fill_red = new ol.style.Fill({
+      color:'red',
+    });
+    // Warna hijau tranparant 0.3
+    var fill_green = new ol.style.Fill({
+      color:'green'
+    });
+    // Warna biru tranparant 0.3
+    var fill_blue = new ol.style.Fill({
+      color:'blue'
+    });
+    // Warna orange tranparant 0.3
+    var fill_orange = new ol.style.Fill({
+      color:'orange'
+    });
+    // Warna abu-abu tranparant 0.3
+    var fill_grey = new ol.style.Fill({
+      color:'grey'
+    });
+  // END START STYLE WARNA
+
+  // START STYLE JENIS PROPERTI
+    // Warna untuk jenis bangunan RUMAH
+    var style_rumah = new ol.style.Style({
+      fill: fill_red,
+      stroke: stroke_black,
+    });
+    // Warna untuk jenis bangunan RUKO
+    var style_ruko = new ol.style.Style({
+      fill: fill_green,
+      stroke: stroke_black,
+    });
+    // Warna untuk jenis bangunan GUDANG
+    var style_gudang = new ol.style.Style({
+      fill: fill_blue,
+      stroke: stroke_black,
+    });
+    // Warna untuk jenis bangunan KANTOR
+    var style_kantor = new ol.style.Style({
+      fill: fill_orange,
+      stroke: stroke_black,
+    });
+    // Warna untuk jenis bangunan TANAH
+    var style_tanah = new ol.style.Style({
+      fill: fill_grey,
+      stroke: stroke_black,
+    });
+  // END START STYLE JENIS PROPERTI
+
+  // START PHP POLYGON
+    <?php 
+      $sql = "SELECT p.idproperti, p.jenis_properti, p.harga, p.alamat, p.geom, g.idgambar AS idGambar, 
+              g.extension AS extension 
+              FROM properti p LEFT JOIN gambar_properti g ON p.idproperti = g.idproperti";
+      $result = $koneksi->query($sql);
+
+      $i_rumah=0;
+      $i_ruko=0;
+      $i_gudang=0;
+      $i_kantor=0;
+      $i_tanah=0;
+
+      while($r = $result->fetch_assoc()) {  
+        $jenisBangunan = $r['jenis_properti'];
+
+        if($r['geom'] != "")
+        {
+          ?>
+            feature = format.readFeature('<?php echo $r['geom']; ?>', 
+            {
+              dataProjection: 'EPSG:4326',
+              featureProjection: 'EPSG:3857'
+            });
+            feature.set('id','<?php echo $r['idproperti']; ?>');
+            feature.set('jenis','<?php echo $r['jenis_properti']; ?>');
+            feature.set('harga','<?php echo $r['harga']; ?>');
+            feature.set('alamat','<?php echo $r['alamat']; ?>');
+            feature.set('gambar','<?php echo $r['idGambar'].".".$r['extension']; ?>');
+              
+          <?php
+            if($jenisBangunan == "rumah")
+            {
+            ?>
+              features_polygon_rumah[<?php echo $i_rumah; ?>] =feature;
+              <?php 
+              $i_rumah++; 
+            }
+            elseif($jenisBangunan=="ruko")
+            {
+            ?>
+              features_polygon_ruko[<?php echo $i_ruko; ?>]=feature;
+              <?php  
+              $i_ruko++;
+            }
+            elseif($jenisBangunan=="gudang")
+            {
+            ?>
+              features_polygon_gudang[<?php echo $i_gudang; ?>] =feature;
+              <?php
+              $i_gudang++;  
+            }
+            elseif($jenisBangunan=="kantor")
+            {
+            ?>
+              features_polygon_tanah[<?php echo $i_kantor; ?>]=feature;
+              <?php  
+              $i_kantor++;
+            }
+            elseif ($jenisBangunan=="tanah")
+            {
+            ?>
+              features_polygon_tanah[<?php echo $i_tanah; ?>]=feature;
+              <?php 
+              $i_tanah++;
+            }
+          }
+        }
+      ?>
+  // END START PHP POLYGON
+
+  // START SOURCE POLYGON TANAH, KANTOR, ETC
+    // POLYGON RUMAH
+    var source_polygon_rumah = new ol.source.Vector({
+      features: features_polygon_rumah
+    });
+    var layer_polygon_rumah = new ol.layer.Vector({
+      source: source_polygon_rumah,
+      style:style_rumah,
+      opacity:0.3
+    });
+    // POLYGON RUKO
+    var source_polygon_ruko = new ol.source.Vector({
+      features: features_polygon_ruko
+    });
+    var layer_polygon_ruko = new ol.layer.Vector({
+      source: source_polygon_ruko,
+      style:style_ruko,
+      opacity:0.3
+    });
+    // POLYGON GUDANG
+    var source_polygon_gudang = new ol.source.Vector({
+      features: features_polygon_gudang
+    });
+    var layer_polygon_gudang = new ol.layer.Vector({
+      source: source_polygon_gudang,
+      style:style_gudang,
+      opacity:0.3
+    });
+    // POLYGON KANTOR
+    var source_polygon_kantor = new ol.source.Vector({
+      features: features_polygon_kantor
+    });
+    var layer_polygon_kantor = new ol.layer.Vector({
+      source: source_polygon_kantor,
+      style:style_kantor,
+      opacity:0.3
+    });
+    // POLYGON TANAH
+    var source_polygon_tanah = new ol.source.Vector({
+      features: features_polygon_tanah
+    });
+    var layer_polygon_tanah = new ol.layer.Vector({
+      source: source_polygon_tanah,
+      style:style_tanah,
+      opacity:0.3
+    });
+  // END START SOURCE POLYGON TANAH, KANTOR, ETC
 
 
-  // POLYGON
-  var layer_polygon = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      features:features_polygon
-    }),
-    // style:style_icon_wkt
-  });
 
+
+
+  // III. UNTUK SETTINGS MAPS
 
   // 1.Penampung source bingmaps
   var sourceBingMaps_AerialWithLabels = new ol.source.BingMaps({
@@ -350,11 +636,20 @@
     layers: [
       osm,
       bing_AerialWithLabels,   
-     
-      layer_point,
-      layer_polygon,
 
-      contoh_point,
+      // Point Of Interest
+      contoh_point_mall,
+      contoh_point_sekolah,
+      contoh_point_pasar,
+      contoh_point_wisata,
+      contoh_point_restoran,
+
+      // Properti
+      layer_polygon_rumah,
+      layer_polygon_ruko,
+      layer_polygon_gudang,
+      layer_polygon_kantor,
+      layer_polygon_tanah,
     ],
     controls:[
       //Define the default controls
@@ -376,44 +671,7 @@
   });
 
 
-  function on_digit(type) {
-    var draw = "";
-    if(type=="point")
-    {
-      draw = new ol.interaction.Draw({
-        source: source_point,
-        type: 'Point'
-      });
-    }
-    else 
-    {
-      draw = new ol.interaction.Draw({
-        source: source_point,
-        type: 'Polygon'
-      });
-    }
-   
-    // Fungsi untuk mengaktifkan kursor digitasi
-    map.addInteraction(draw);
-      draw.on('drawend', function(evt){
-      // Hapus source point dan polygon
-      source_point.refresh({force:true});
-      
-      var feature = evt.feature;
-      var geom = feature.getGeometry().clone();
-      geom = geom.transform('EPSG:3857','EPSG:4326');
-      var wkt  = format.writeGeometry(geom);
-    
-      if(type=="point")
-      {
-        $('#geom_point').val(wkt);
-      }
-      else 
-      {
-        $('#geom_polygon').val(wkt);
-      }
-    });
-  } 
+  
 
 </script>
 

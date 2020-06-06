@@ -379,8 +379,6 @@
     stroke: stroke_black,
   });
 
-
-
   // Untuk menyimpan format WKT()
   // WKT() : point, line, polygon (dalam bentuk string)
   var format =  new ol.format.WKT();
@@ -459,8 +457,6 @@
           }
         }
       }
-    
-    
     ?>
 
 
