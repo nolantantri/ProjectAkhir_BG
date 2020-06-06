@@ -248,7 +248,15 @@
                 }
                    ?>
               </table><br>
+              <div style="text-align: right;">
+                <a href="../proses/cetak_properti_proses.php">
+                  <i class="nav-icon fas fa-file-export"></i>
+                  Download Data Properti
+                </a>
+              </div>
+              <br>
               <a class="btn btn-primary" href="form_tambah_properti.php">TAMBAH PROPERTI</a>
+
             </div>
 
           <div id="maps_option" style="margin-left: 20px;">

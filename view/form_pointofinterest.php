@@ -230,6 +230,13 @@
                 }
                    ?>
               </table><br>
+              <div style="text-align: right;">
+                <a href="../proses/cetak_pointofinterest_proses.php">
+                  <i class="nav-icon fas fa-file-export"></i>
+                  Download Data Point Of Interest
+                </a>
+              </div>
+              <br>
               <a class="btn btn-primary" href="form_tambah_pointofinterest.php">TAMBAH POINT OF INTEREST</a>
             </div>
 
