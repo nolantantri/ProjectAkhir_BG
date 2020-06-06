@@ -1,5 +1,13 @@
-<?php 
-	require('../connect.php');
+<?php require('../connect.php');
+
+	function folder_exist($folder) {
+		$path = realpath($folder);
+		if($path !== false AND is_dir($path)) 
+		{
+			return $path;
+		}
+	   return false;
+	}
 
 	$id= $_GET['id'];
 	$kategori_transaksi= $_POST['kategori_transaksi'];
@@ -18,7 +26,7 @@
 			$sql = "UPDATE properti SET kategori_transaksi='$kategori_transaksi', jenis_properti='$jenis_properti'    , harga='$harga', alamat='$alamat', luastanah='$luas_tanah', luasbangunan= '$luas_bangunan'    , geom='$geom', keterangan='$keterangan'  WHERE idproperti=".$id;
 			$hasil =$koneksi->query($sql);
 
-			if($hasil === TRUE)
+			if($hasil)
 			{
 				if(file_exists($_FILES['gambar']['tmp_name'][0]))
 				{
@@ -28,6 +36,11 @@
 					for($i=0; $i<$total; $i++)
 					{
 						$path = "../img";
+						if(!folder_exist($path))
+						{
+							mkdir($path,0777);
+						}
+
 			    		$idgambar = 1;
 			    		$sql2 = "SELECT * FROM gambar_properti ORDER BY idgambar DESC LIMIT 1";
 			    		$hasil2 = $koneksi->query($sql2);
