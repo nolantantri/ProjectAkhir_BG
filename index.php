@@ -222,9 +222,6 @@
 			{
 				include('view/' . $subpage . '.php');
 			}
-			else{
-				echo "file not found!";
-			}
 		?>
       </div>
     </section>
@@ -752,63 +749,68 @@
       	var info = function(pixel) {var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
           return feature;
         });
-        if (feature) {
-			if(feature.get('type')=="poi"){
-				content.innerHTML = "<table>"+
-					"<tr>"+
-						"<td>"+
-							"<b>"+feature.get('nama')+"</b><br>"+feature.get('jenispoi')+"<br>"+
-						"</td>"+
-					"</tr>"+
-				"</table>";
-			}else if(feature.get('type')=="property"){
-				content.innerHTML = "<table>"+
-					 "<tr>"+
-					  "<td rowspan='4'>"+
-					   "<div class='container' style='width:100%;'>"+
-						"<img src='img/"+feature.get('gambar')+"' style='width:100%;'></div>"+
-					  "</td>"+
-					  "<td>"+
-					   "<b>Jenis</b>"+
-					  "</td>"+
-					  "<td>"+
-					   ":"+
-					  "</td>"+
-					  "<td>"+
-					   feature.get('jenis')+
-					  "</td>"+
-					 "</tr>"+
-					 "<tr>"+
-					  "<td>"+
-					   "<b>Harga</b>"+
-					  "</td>"+
-					  "<td>"+
-					   ":"+
-					  "</td>"+
-					  "<td>"+
-					   feature.get('harga')+
-					  "</td>"+
-					 "</tr>"+
-					 "<tr>"+
-					  "<td style='vertical-align: top;'>"+
-					   "<b>Alamat</b>"+
-					  "</td>"+
-					  "<td style='vertical-align: top;'>"+
-					   ":"+
-					  "</td>"+
-					  "<td>"+
-					   feature.get('alamat')+
-					  "</td>"+
-					 "</tr>"+
-					 "<tr>"+
-					  "<td colspan='3'>"+
-					   "<a href='index.php?detailprop=form_detail_property&id="+feature.get('id')+"'>Lihat detail</a>"+
-					  "</td>"+
-					 "</tr>"+
-					"</table>";
-		   }
-          
-        } else {
+        if (feature) 
+        {
+    			if(feature.get('type')=="poi")
+          {
+    				content.innerHTML = "<table>"+
+    					"<tr>"+
+    						"<td>"+
+    							"<b>"+feature.get('nama')+"</b><br>"+feature.get('jenispoi')+"<br>"+
+    						"</td>"+
+    					"</tr>"+
+    				"</table>";
+    			}
+          else if(feature.get('type')=="property")
+          {
+    				  content.innerHTML = "<table>"+
+    					 "<tr>"+
+    					  "<td rowspan='4'>"+
+    					   "<div class='container' style='width:100%;'>"+
+    						"<img src='img/"+feature.get('gambar')+"' style='width:100%;'></div>"+
+    					  "</td>"+
+    					  "<td>"+
+    					   "<b>Jenis</b>"+
+    					  "</td>"+
+    					  "<td>"+
+    					   ":"+
+    					  "</td>"+
+    					  "<td>"+
+    					   feature.get('jenis')+
+    					  "</td>"+
+    					 "</tr>"+
+    					 "<tr>"+
+    					  "<td>"+
+    					   "<b>Harga</b>"+
+    					  "</td>"+
+    					  "<td>"+
+    					   ":"+
+    					  "</td>"+
+    					  "<td>"+
+    					   feature.get('harga')+
+    					  "</td>"+
+    					 "</tr>"+
+    					 "<tr>"+
+    					  "<td style='vertical-align: top;'>"+
+    					   "<b>Alamat</b>"+
+    					  "</td>"+
+    					  "<td style='vertical-align: top;'>"+
+    					   ":"+
+    					  "</td>"+
+    					  "<td>"+
+    					   feature.get('alamat')+
+    					  "</td>"+
+    					 "</tr>"+
+    					 "<tr>"+
+    					  "<td colspan='3'>"+
+    					   "<a href='index.php?detailprop=form_detail_property&id="+feature.get('id')+"'>Lihat Detail</a>"+
+    					  "</td>"+
+    					 "</tr>"+
+    					"</table>";
+    		  }
+        } 
+        else 
+        {
           content.innerHTML = 'Tidak ada informasi!';
         }
       };
