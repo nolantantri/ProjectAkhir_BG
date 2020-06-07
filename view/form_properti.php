@@ -460,7 +460,6 @@
     ?>
 
 
- 
   // POLYGON RUMAH
   var source_polygon_rumah = new ol.source.Vector({
     features: features_polygon_rumah
@@ -468,7 +467,7 @@
   var layer_polygon_rumah = new ol.layer.Vector({
     source: source_polygon_rumah,
     style:style_rumah,
-    opacity:0.3
+    opacity:0.6
   });
   // POLYGON RUKO
   var source_polygon_ruko = new ol.source.Vector({
@@ -477,7 +476,7 @@
   var layer_polygon_ruko = new ol.layer.Vector({
     source: source_polygon_ruko,
     style:style_ruko,
-    opacity:0.3
+    opacity:0.6
   });
   // POLYGON GUDANG
   var source_polygon_gudang = new ol.source.Vector({
@@ -486,7 +485,7 @@
   var layer_polygon_gudang = new ol.layer.Vector({
     source: source_polygon_gudang,
     style:style_gudang,
-    opacity:0.3
+    opacity:0.6
   });
   // POLYGON KANTOR
   var source_polygon_kantor = new ol.source.Vector({
@@ -495,7 +494,7 @@
   var layer_polygon_kantor = new ol.layer.Vector({
     source: source_polygon_kantor,
     style:style_kantor,
-    opacity:0.3
+    opacity:0.6
   });
   // POLYGON TANAH
   var source_polygon_tanah = new ol.source.Vector({
@@ -504,7 +503,7 @@
   var layer_polygon_tanah = new ol.layer.Vector({
     source: source_polygon_tanah,
     style:style_tanah,
-    opacity:0.3
+    opacity:0.6
   });
 
 
