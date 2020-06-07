@@ -40,7 +40,52 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+      .ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        min-width: 280px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 60px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 60px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "✖";
+      }
+    </style> 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -155,7 +200,12 @@
             </p>
           </div>
 
-          <div id="map" class="map" style="width: 100%;height:350px;"></div>
+			<div id="map" class="map" style="width: 100%;height:350px;"></div>
+			
+			<div id="popup" class="ol-popup">
+			  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+			  <div id="popup-content"></div>
+			</div>
         </div>
 		
 		<?php
@@ -163,6 +213,17 @@
 			if (file_exists('view/' . $page . '.php'))  
 			{
 				include('view/' . $page . '.php');
+			}
+		?>
+		
+		<?php
+			$subpage = isset($_GET['detailprop']) ? $_GET['detailprop'] : 'home';
+			if (file_exists('view/' . $subpage . '.php'))  
+			{
+				include('view/' . $subpage . '.php');
+			}
+			else{
+				echo "file not found!";
 			}
 		?>
       </div>
@@ -325,6 +386,7 @@
       feature.set('nama','<?php echo $r['nama'] ?>');
       feature.set('jenispoi','<?php echo $r['jenis_pointofinterest'] ?>');
       feature.set('geom','<?php echo $r['geom'] ?>');
+		feature.set('type','poi');
 
     <?php  
       if($jenisTempat == "mall" )
@@ -501,6 +563,7 @@
             feature.set('harga','<?php echo $r['harga']; ?>');
             feature.set('alamat','<?php echo $r['alamat']; ?>');
             feature.set('gambar','<?php echo $r['idGambar'].".".$r['extension']; ?>');
+            feature.set('type','property');
               
           <?php
             if($jenisBangunan == "rumah")
@@ -671,8 +734,103 @@
   });
 
 
-  
+	//onclick maps
+	
+	  var container = document.getElementById('popup');
+      var content = document.getElementById('popup-content');
+      var closer = document.getElementById('popup-closer');
+      var overlay = new ol.Overlay( ({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+          duration: 250
+        }
+      }));
+      
+      closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+      };
+	
+	 
+      	var info = function(pixel) {var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+          return feature;
+        });
+        if (feature) {
+			if(feature.get('type')=="poi"){
+				content.innerHTML = "<table>"+
+					"<tr>"+
+						"<td>"+
+							"<b>"+feature.get('nama')+"</b><br>"+feature.get('jenispoi')+"<br>"+
+						"</td>"+
+					"</tr>"+
+				"</table>";
+			}else if(feature.get('type')=="property"){
+				content.innerHTML = "<table>"+
+					 "<tr>"+
+					  "<td rowspan='4'>"+
+					   "<div class='container' style='width:100%;'>"+
+						"<img src='img/"+feature.get('gambar')+"' style='width:100%;'></div>"+
+					  "</td>"+
+					  "<td>"+
+					   "<b>Jenis</b>"+
+					  "</td>"+
+					  "<td>"+
+					   ":"+
+					  "</td>"+
+					  "<td>"+
+					   feature.get('jenis')+
+					  "</td>"+
+					 "</tr>"+
+					 "<tr>"+
+					  "<td>"+
+					   "<b>Harga</b>"+
+					  "</td>"+
+					  "<td>"+
+					   ":"+
+					  "</td>"+
+					  "<td>"+
+					   feature.get('harga')+
+					  "</td>"+
+					 "</tr>"+
+					 "<tr>"+
+					  "<td style='vertical-align: top;'>"+
+					   "<b>Alamat</b>"+
+					  "</td>"+
+					  "<td style='vertical-align: top;'>"+
+					   ":"+
+					  "</td>"+
+					  "<td>"+
+					   feature.get('alamat')+
+					  "</td>"+
+					 "</tr>"+
+					 "<tr>"+
+					  "<td colspan='3'>"+
+					   "<a href='index.php?detailprop=form_detail_property&id="+feature.get('id')+"'>Lihat detail</a>"+
+					  "</td>"+
+					 "</tr>"+
+					"</table>";
+		   }
+          
+        } else {
+          content.innerHTML = 'Tidak ada informasi!';
+        }
+      };
 
+      	map.on('singleclick', function(evt) {
+	        var coordinate = evt.coordinate;
+	        info(evt.pixel);
+	        overlay.setPosition(coordinate);
+      	});
+      	map.addOverlay(overlay);
+
+      	var overlay1 = new ol.Overlay({
+        	element: document.getElementById("overlay1")
+      	});
+      	overlay1.setPosition(ol.proj.fromLonLat([112.8232, -7.2242]));
+      	map.addOverlay(overlay1);
+	 
 </script>
 
 
