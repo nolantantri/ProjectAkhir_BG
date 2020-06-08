@@ -224,9 +224,9 @@
                <input type="checkbox" name="cb_harga">&nbsp
                Range Harga :
                <br>
-               <input  type="number" name="min_price" placeholder="Min. Harga"> 
+               <input  type="number" name="min_price" placeholder="Min. Harga" min="0"> 
                &nbsp s/d &nbsp
-               <input  type="number" name="max_price" placeholder="Max. Harga">
+               <input  type="number" name="max_price" placeholder="Max. Harga" min="0">
                </p>
 
                <div style="width: 100%"></div>
