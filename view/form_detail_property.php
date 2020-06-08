@@ -8,7 +8,6 @@
 ?>
 	
 	<div style="margin-top:2%; margin-left: 10px">
-		<center>
 		<p style="font-weight: bold; font-size: 20px;">* DETAIL PROPERTI *</p>
 			<table>
 				<tr>
@@ -50,25 +49,15 @@
 					<td width='150px'>Gambar</td>
 					<td width='50px'>:</td>
 					<td width='300px'>
-						<div class='container' style='width:100%;'>
+						<div class='gambar'>
 							<?php 
 								$sql2 = "SELECT * FROM properti as p inner join gambar_properti as gp ON p.idproperti=gp.idproperti WHERE p.idproperti='$propid'";
 								$hasil2 = $koneksi->query($sql2);
 								while ($row2 = $hasil2->fetch_assoc())
 								{
-									echo "<img width='120' src='img/" . $row2['idgambar'] . "." . $row2['extension'] . "'	>";
+									echo "<img width='100' src='img/".$row2['idgambar'].".".$row2['extension'] . "' style='border:solid 2px'> &nbsp";
 								}
 							?>
-						</div>
-					</td>
-				</tr>
-				
-				<tr>
-					<td width='150px'><a href="index.php"> kembali </a></td>
-					<td width='50px'></td>
-					<td width='300px'></td>
-						<div class="container_gbr"> 
-							<img width='120px' src='img/<?php echo $row['idgambar']?>.<?php echo $row['extension'] ?>' >
 						</div>
 					</td>
 				</tr>
@@ -78,7 +67,6 @@
 				<a href="index.php" class="btn btn-danger"> Kembali Ke Halaman Home </a>	
 			</center>
 			<br>	
-			</center>
 	</div>
 	
 <?php

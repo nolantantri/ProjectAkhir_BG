@@ -120,51 +120,7 @@
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
-     <form class="form-inline ml-3" method="post">
-      <div class="input-group input-group-sm">
-		<input type="checkbox" name="cb_kategori">
-		<label for="vehicle1"> kategori</label>
-		<select name="kategori">
-		  <option value="jual">Jual</option>
-		  <option value="beli">Beli</option>
-		</select>
-&emsp;
-		<input type="checkbox" name="cb_jenis">
-		<label for="vehicle1"> jenis</label>
-		<select name="jenis" >
-		  <option value="rumah">Rumah</option>
-		  <option value="ruko">Ruko</option>
-		  <option value="gudang">Gudang</option>
-		  <option value="kantor">Kantor</option>
-		  <option value="tanah">Tanah</option>
-		</select>
-&emsp;
-		<input type="checkbox" name="cb_harga">
-		<label for="vehicle1"> range harga</label>
-		
-        <input  type="number" name="min_price"> - 
-        <input  type="numer" name="max_price">
-&emsp;
-		<input type="checkbox" name="cb_lokasi">
-		<label for="vehicle1"> lokasi</label>
-
-        <input class="form-control form-control-navbar" type="search" name="lokasi" placeholder="lokasi" aria-label="Search">
-		&emsp;
-		
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit" name="search_property" name="find">
-            <i class="fas fa-search"></i>
-			
-          </button>
-        </div>
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit" name="search_property" name="find">
-            kembali
-          </button>
-        </div>
-      </div>
-    </form> 
+    
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -234,12 +190,71 @@
             </p>
           </div>
 
-			<div id="map" class="map" style="width: 100%;height:350px;"></div>
+          <div class="search" style="margin-left: 20px; width: 100%">
+            <p style="font-weight: bold;">Pencarian Data Properti: </p>
+            <form class="form-inline ml-3" method="POST">
+              <p style="font-weight: bold;">  
+                <input type="checkbox" name="cb_kategori">&nbsp
+                Kategori Transaksi :
+                <br>
+                <select class="btn btn-warning dropdown-toggle" name="kategori" style="width: 150px">
+                  <option value="jual">Jual</option>
+                  <option value="beli">Beli</option>
+                </select>
+              </p>
+
+              <div style="width: 100%"></div>
+
+                <p style="font-weight: bold;">
+                  <input type="checkbox" name="cb_jenis">&nbsp
+                  Jenis Bangunan :
+                  <br>
+                  <select class="btn btn-warning dropdown-toggle" name="jenis" style="width: 150px">
+                    <option value="rumah">Rumah</option>
+                    <option value="ruko">Ruko</option>
+                    <option value="gudang">Gudang</option>
+                    <option value="kantor">Kantor</option>
+                    <option value="tanah">Tanah</option>
+                  </select>
+                </p>
+
+               <div style="width: 100%"></div>
+
+               <p style="font-weight: bold;">
+               <input type="checkbox" name="cb_harga">&nbsp
+               Range Harga :
+               <br>
+               <input  type="number" name="min_price" placeholder="Min. Harga"> 
+               &nbsp s/d &nbsp
+               <input  type="number" name="max_price" placeholder="Max. Harga">
+               </p>
+
+               <div style="width: 100%"></div>
+               
+               <p style="font-weight: bold;">
+               <input type="checkbox" name="cb_lokasi">&nbsp
+               Lokasi :
+               <br>
+               <input class="form-control form-control-navbar" type="search" name="lokasi" placeholder="Lokasi" aria-label="Search">
+               </p>
+              
+               <div style="width: 100%"></div>
+
+               <div class="input-group-append">
+                <p>
+                  <button class="btn btn-info" type="submit" name="search_property" name="find">Search</button>  
+                </p>
+              </div>
+
+            </form>            
+          </div>
+
+			    <div id="map" class="map" style="width: 100%;height:350px;"></div>
 			
-			<div id="popup" class="ol-popup">
-			  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-			  <div id="popup-content"></div>
-			</div>
+    			<div id="popup" class="ol-popup">
+    			  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    			  <div id="popup-content"></div>
+    			</div>
         </div>
 		
 		<?php
