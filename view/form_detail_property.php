@@ -2,10 +2,11 @@
 	
 	$propid= $_GET['id'];
 
-	$sql = "SELECT * FROM properti as p inner join gambar_properti as gp ON p.idproperti=gp.idproperti WHERE p.idproperti='$propid'";
+	$sql = "SELECT * FROM properti WHERE idproperti='$propid'";
 	$hasil = $koneksi->query($sql);
-	if ($row = $hasil->fetch_array())
+	while ($row = $hasil->fetch_assoc())
 	{
+		
 ?>
 	
 	<div style="margin-top:2%;">
@@ -49,7 +50,18 @@
 				<tr>
 					<td width='150px'>gambar</td>
 					<td width='50px'>:</td>
-					<td width='300px'><div class='container' style='width:100%;'><img width='120' src='img/<?php echo $row['idgambar']?>.<?php echo $row['extension'] ?>' ></div></td>
+					<td width='300px'>
+						<div class='container' style='width:100%;'>
+							<?php 
+								$sql2 = "SELECT * FROM properti as p inner join gambar_properti as gp ON p.idproperti=gp.idproperti WHERE p.idproperti='$propid'";
+								$hasil2 = $koneksi->query($sql2);
+								while ($row2 = $hasil2->fetch_assoc())
+								{
+									echo "<img width='120' src='img/" . $row2['idgambar'] . "." . $row2['extension'] . "'	>";
+								}
+							?>
+						</div>
+					</td>
 				</tr>
 				
 				<tr>
@@ -62,10 +74,10 @@
 	</div>
 <?php
 	}
-	else
-	{
-		echo "<script type='text/javascript'> alert('terjadi kesalahan');</script>";
-	}
+	// else
+	// {
+		// echo "<script type='text/javascript'> alert('terjadi kesalahan');</script>";
+	// }
 ?>
 
 
