@@ -121,16 +121,50 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <!-- <form class="form-inline ml-3">
+     <form class="form-inline ml-3" method="post">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+		<input type="checkbox" name="cb_kategori">
+		<label for="vehicle1"> kategori</label>
+		<select name="kategori">
+		  <option value="jual">Jual</option>
+		  <option value="beli">Beli</option>
+		</select>
+&emsp;
+		<input type="checkbox" name="cb_jenis">
+		<label for="vehicle1"> jenis</label>
+		<select name="jenis" >
+		  <option value="rumah">Rumah</option>
+		  <option value="ruko">Ruko</option>
+		  <option value="gudang">Gudang</option>
+		  <option value="kantor">Kantor</option>
+		  <option value="tanah">Tanah</option>
+		</select>
+&emsp;
+		<input type="checkbox" name="cb_harga">
+		<label for="vehicle1"> range harga</label>
+		
+        <input  type="number" name="min_price"> - 
+        <input  type="numer" name="max_price">
+&emsp;
+		<input type="checkbox" name="cb_lokasi">
+		<label for="vehicle1"> lokasi</label>
+
+        <input class="form-control form-control-navbar" type="search" name="lokasi" placeholder="lokasi" aria-label="Search">
+		&emsp;
+		
         <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
+          <button class="btn btn-navbar" type="submit" name="search_property" name="find">
             <i class="fas fa-search"></i>
+			
+          </button>
+        </div>
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit" name="search_property" name="find">
+            kembali
           </button>
         </div>
       </div>
-    </form> -->
+    </form> 
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -533,9 +567,50 @@
 
   // START PHP POLYGON
     <?php 
-      $sql = "SELECT p.idproperti, p.jenis_properti, p.harga, p.alamat, p.geom, g.idgambar AS idGambar, 
-              g.extension AS extension 
-              FROM properti p LEFT JOIN gambar_properti g ON p.idproperti = g.idproperti";
+   	  $sql = "";
+	  if(isset($_POST['find'])){
+		$sql = "SELECT p.idproperti, p.jenis_properti, p.harga, p.alamat, p.geom, g.idgambar AS idGambar, 
+		  g.extension AS extension 
+		  FROM properti p LEFT JOIN gambar_properti g ON p.idproperti = g.idproperti";
+  
+	  }else{
+		$sql = "SELECT p.idproperti, p.jenis_properti, p.harga, p.alamat, p.geom, g.idgambar AS idGambar, 
+		  g.extension AS extension 
+		  FROM properti p LEFT JOIN gambar_properti g ON p.idproperti = g.idproperti";
+	  }
+	  $where = "";
+	   
+	  if(isset($_POST['cb_kategori'])){
+		    $where = "kategori_transaksi = '" . $_POST['kategori'] . "'";
+	  }
+	  if(isset($_POST['cb_jenis'])){
+	    if($where == ""){
+		    $where = "jenis_properti = '" . $_POST['jenis'] . "'";
+		}
+		else{
+			$where = " AND jenis_properti = '" . $_POST['jenis'] . "'";
+		}
+	  }
+	  if(isset($_POST['cb_harga'])){
+	    if($where == ""){
+		    $where = "harga BETWEEN '" . $_POST['min_price'] . "' AND '" . $_POST['min_price'] . "'";
+		}
+		else{
+		    $where = " AND harga BETWEEN '" . $_POST['min_price'] . "' AND '" . $_POST['min_price'] . "'";
+		}
+	  }	  
+	  if(isset($_POST['cb_lokasi'])){
+	  if($where == ""){
+		    $where = "alamat LIKE '%" . $_POST['lokasi'] . "%'";
+		}
+		else{
+		    $where = " AND alamat LIKE '%" . $_POST['lokasi'] . "%'";
+		}
+	  }	  
+	  
+		if($where != "") {
+			$sql .= " WHERE " . $where;
+		}
       $result = $koneksi->query($sql);
 
       $i_rumah=0;
