@@ -125,19 +125,25 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item">
-        <a class="nav-link"  href="view/form_login.php">
-          <i class="far fa-user"></i>
-        </a>        
-      </li>
-
-	<?php	if(isset($_SESSION['nama'])){ ?>
+    
+	<?php	
+  if(isset($_SESSION['nama'])){ 
+  ?>
       <li class="nav-item">
         <a class="nav-link"  href="proses/logout_proses.php">
           <i class="fa fa-sign-out"></i>
         </a>        
       </li>
-	<?php } ?>
+	<?php 
+  } 
+  else{
+  ?>
+   <li class="nav-item">
+        <a class="nav-link"  href="view/form_login.php">
+          <i class="far fa-user"></i>
+        </a>        
+      </li>
+  <?php } ?>
     </ul>
   </nav>
   <!-- /.navbar -->

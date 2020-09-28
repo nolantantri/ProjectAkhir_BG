@@ -90,11 +90,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item">
-        <a class="nav-link"  href="../proses/form_login.php">
-          <i class="far fa-user"></i>
-        </a>        
-      </li>
+    
 
   <?php if(isset($_SESSION['nama'])){ ?>
       <li class="nav-item">
